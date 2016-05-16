@@ -16,12 +16,12 @@
                 android:id="@+id/fg_home_expert_vp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
-        <com.jinke.doctorbear.Utils.MyListView
+        <com.jinke.doctorbear.Utils.ScrollListView
             android:id="@+id/fg_home_expert_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/fg_home_expert_vp">
-        </com.jinke.doctorbear.Utils.MyListView>
+        </com.jinke.doctorbear.Utils.ScrollListView>
     </LinearLayout>
     </ScrollView>
 </RelativeLayout>
