@@ -1,5 +1,6 @@
 package com.jinke.doctorbear;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -27,11 +28,13 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     private TabIndicatorView IndicatorMe;
 
     private FragmentTabHost tabHost;
-    
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp = getSharedPreferences("info",MODE_PRIVATE);
+        sp.edit().putBoolean("page",true).commit();
         //初始化布局
         initView();
         //初始化监听
