@@ -11,8 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
-import com.jinke.doctorbear.Utils.MyListView;
+import com.jinke.doctorbear.Utils.ScrollListView;
 import com.jinke.doctorbear.Utils.NoScrollViewPager;
 
 /**
@@ -44,7 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 		tv_expert_line = (TextView)view.findViewById(R.id.tv_expert_line);
 		tv_answer.setTextColor(this.getResources().getColor(R.color.colorPressed));
 		tv_answer_line.setVisibility(View.VISIBLE);
-		viewPager.setAdapter(new MyAdapter());
+		viewPager.setAdapter(new AdpHomeFgMain(view.getContext()));
 
 	}
 	private void initListener() {
@@ -86,128 +87,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 		}
 	}
 
-	/**
-	 * 主界面ViewPager适配器，只有两个界面
-	 * 一个问答界面，一个科普界面
-	 */
-	class MyAdapter extends PagerAdapter {
 
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return 2;
-		}
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view==object;
-		}
-		public Object instantiateItem(ViewGroup container, int position) {
-			View view = null;
-			//问答界面
-			if (position==0){
-				view = View.inflate(getContext(), R.layout.fg_home_answer,null);
-				ListView listView_answer = (ListView) view.findViewById(R.id.fg_home_answer_lv);
-				listView_answer.setAdapter(new AnswerLvAdapter());
-			}
-			//科普界面
-			if (position==1){
-				view = View.inflate(getContext(), R.layout.fg_home_expert,null);
-				MyListView listView_expert = (MyListView) view.findViewById(R.id.fg_home_expert_lv);
-				ViewPager viewPager_expert = (ViewPager)view.findViewById(R.id.fg_home_expert_vp);
-				viewPager_expert.setAdapter(new ExpertVpAdapter());
-				listView_expert.setAdapter(new ExpertLvAdapter());
-
-			}
-			container.addView(view);
-			return view;
-		}
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object) {
-			super.destroyItem(container, position, object);
-			container.removeView((View) object);
-		}
-	}
-
-	/**
-	 * 科普界面ViewPager的适配器
-	 */
-	class ExpertVpAdapter extends PagerAdapter {
-
-		@Override
-		public int getCount() {
-			return 4;
-		}
-
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view==object;
-		}
-
-		@Override
-		public Object instantiateItem(ViewGroup container, int position) {
-			View view = View.inflate(getContext(), R.layout.fg_home_expert_vp_item,null);
-			container.addView(view);
-			return view;
-		}
-
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object) {
-			//super.destroyItem(container, position, object);
-			container.removeView((View) object);
-		}
-	}
-
-	/**
-	 * 科普界面ListView的适配器
-	 */
-	class ExpertLvAdapter extends BaseAdapter{
-
-		@Override
-		public int getCount() {
-			return 5;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = View.inflate(getContext(), R.layout.fg_home_expert_lv_item,null);
-			return view;
-		}
-	}
-
-	/**
-	 * 问答界面ListView的适配器
-	 */
-	class AnswerLvAdapter extends BaseAdapter{
-
-		@Override
-		public int getCount() {
-			return 5;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = View.inflate(getContext(), R.layout.fg_home_answer_lv_item,null);
-			return view;
-		}
-	}
 }

@@ -13,14 +13,14 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="13dp"
-            android:src="@drawable/fg_home_left_edit"/>
+            android:src="@drawable/fg_home_right_search"/>
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="13dp"
-            android:src="@drawable/fg_home_right_search"/>
+            android:src="@drawable/fg_home_left_edit"/>
         <TextView
             android:id="@+id/tv_center"
             android:layout_height="wrap_content"

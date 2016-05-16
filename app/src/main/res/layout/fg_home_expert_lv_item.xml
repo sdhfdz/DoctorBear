@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/iv"
+        android:id="@+id/fg_home_expert_lv_iv_expertpicture"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerVertical="true"
@@ -16,10 +16,12 @@
         android:layout_height="50dp"
         android:gravity="center_vertical">
         <ImageView
+            android:id="@+id/fg_home_expert_lv_iv_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/head"/>
         <TextView
+            android:id="@+id/fg_home_expert_lv_tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="叫我刘医生"
@@ -27,6 +29,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/colorMain"/>
         <TextView
+            android:id="@+id/fg_home_expert_lv_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#9B9B9B"
@@ -35,7 +38,7 @@
             android:text="2分钟前"/>
     </LinearLayout>
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/fg_home_expert_lv_tv_expertTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll"
@@ -48,7 +51,7 @@
         android:textSize="18sp"
         android:textColor="#000"/>
     <LinearLayout
-        android:layout_below="@id/tv"
+        android:layout_below="@id/fg_home_expert_lv_tv_expertTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -62,6 +65,7 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/fg_home_like"/>
         <TextView
+            android:id="@+id/fg_home_expert_lv_tv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -75,6 +79,7 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/fg_home_comment"/>
         <TextView
+            android:id="@+id/fg_home_expert_lv_tv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

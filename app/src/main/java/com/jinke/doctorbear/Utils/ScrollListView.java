@@ -8,16 +8,16 @@ import android.widget.ListView;
  * Created by QZ on 2016/4/12.
  * 兼容ScrollView的ListView
  */
-public class MyListView extends ListView {
-    public MyListView(Context context) {
+public class ScrollListView extends ListView {
+    public ScrollListView(Context context) {
         super(context);
     }
 
-    public MyListView(Context context, AttributeSet attrs) {
+    public ScrollListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyListView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ScrollListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
