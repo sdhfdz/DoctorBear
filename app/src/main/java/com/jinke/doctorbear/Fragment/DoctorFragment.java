@@ -18,7 +18,7 @@ public class DoctorFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_doctor, container, false);
+		View view = inflater.inflate(R.layout.fg_doctor, container, false);
 		
 		return view;
 	}

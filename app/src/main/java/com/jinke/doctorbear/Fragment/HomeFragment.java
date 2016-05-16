@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.MyListView;
-import com.jinke.doctorbear.View.NoScrollViewPager;
+import com.jinke.doctorbear.Utils.NoScrollViewPager;
 
 /**
  * 主页面业务逻辑
@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_home, container, false);
+		View view = inflater.inflate(R.layout.fg_home, container, false);
 		initView(view);
 		initListener();
 		return view;

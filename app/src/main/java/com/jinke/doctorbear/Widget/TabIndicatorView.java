@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jinke.doctorbear.R;
 
 /**
+ * 设置TabHost的图标和文字
  * Created by QZ on 2016/5/12.
  */
 public class TabIndicatorView extends RelativeLayout {
