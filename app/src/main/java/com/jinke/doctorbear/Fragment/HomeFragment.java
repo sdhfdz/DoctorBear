@@ -1,6 +1,7 @@
 package com.jinke.doctorbear.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.ScrollListView;
@@ -29,6 +33,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 	private TextView tv_expert;
 	private TextView tv_answer_line;
 	private TextView tv_expert_line;
+	private ImageView iv_search;
 	SharedPreferences sp;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,10 +47,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 	private void initView(View view) {
 		viewPager = (NoScrollViewPager) view.findViewById(R.id.viewpager);
-		tv_answer = (TextView) view.findViewById(R.id.tv_answer);
-		tv_expert = (TextView) view.findViewById(R.id.tv_expert);
-		tv_answer_line = (TextView)view.findViewById(R.id.tv_answer_line);
-		tv_expert_line = (TextView)view.findViewById(R.id.tv_expert_line);
+		tv_answer = (TextView) view.findViewById(R.id.fg_home_tv_answer);
+		tv_expert = (TextView) view.findViewById(R.id.fg_home_tv_expert);
+		tv_answer_line = (TextView)view.findViewById(R.id.fg_home_tv_answer_line);
+		tv_expert_line = (TextView)view.findViewById(R.id.fg_home_tv_expert_line);
+		iv_search = (ImageView) view.findViewById(R.id.fg_home_iv_search);
+
 		boolean page = sp.getBoolean("page",true);
 		if (page){
 			changeColorAndPage(0);
@@ -58,18 +65,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 	private void initListener() {
 		tv_answer.setOnClickListener(this);
 		tv_expert.setOnClickListener(this);
+		iv_search.setOnClickListener(this);
 	}
 	@Override
+
 	public void onClick(View v) {
 		switch (v.getId()){
-			case R.id.tv_answer:
+			case R.id.fg_home_tv_answer:
 				changeColorAndPage(0);
 				sp.edit().putBoolean("page",true).commit();
 				break;
-			case R.id.tv_expert:
+			case R.id.fg_home_tv_expert:
 				changeColorAndPage(1);
 				sp.edit().putBoolean("page",false).commit();
 				break;
+			case R.id.fg_home_iv_search:
+				Intent intent = new Intent(v.getContext(), FgHomeSearchActivity.class);
+				startActivity(intent);
 			default:
 				break;
 		}

@@ -6,4 +6,6 @@
     <color name="colorPressed">#47C6C3</color>
     <color name="colorMain">#47C6C3</color>
     <color name="colorNormal">#A2A8B4</color>
+    <color name="colorCancel">#00CBC4</color>
+    <color name="colorBackground">#F7F7F7</color>
 </resources>

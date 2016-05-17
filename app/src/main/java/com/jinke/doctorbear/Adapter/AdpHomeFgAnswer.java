@@ -1,6 +1,7 @@
 package com.jinke.doctorbear.Adapter;
 
 /**
+ * 问答界面ListView的适配器
  * Created by Max on 2016/5/16.
  */
 
@@ -16,9 +17,6 @@ import android.widget.TextView;
 
 import com.jinke.doctorbear.R;
 
-/**
- * 问答界面ListView的适配器
- */
 class AdpHomeFgAnswer extends BaseAdapter {
     Context context;
 

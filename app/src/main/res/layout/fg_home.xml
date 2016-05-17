@@ -13,16 +13,17 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="13dp"
-            android:src="@drawable/fg_home_right_search"/>
+            android:src="@drawable/fg_home_left_edit"/>
         <ImageView
+            android:id="@+id/fg_home_iv_search"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="13dp"
-            android:src="@drawable/fg_home_left_edit"/>
+            android:src="@drawable/fg_home_right_search"/>
         <TextView
-            android:id="@+id/tv_center"
+            android:id="@+id/fg_home_tv_center"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_centerInParent="true"
@@ -30,44 +31,44 @@
             android:text="|"/>
 
         <TextView
-            android:id="@+id/tv_answer"
+            android:id="@+id/fg_home_tv_answer"
             android:layout_height="wrap_content"
             android:layout_width="50dp"
             android:gravity="center"
             android:layout_centerVertical="true"
             android:textSize="20sp"
             android:textColor="#030303"
-            android:layout_toLeftOf="@id/tv_center"
+            android:layout_toLeftOf="@id/fg_home_tv_center"
             android:layout_marginRight="10dp"
             android:text="问答"/>
         <TextView
-            android:id="@+id/tv_expert"
+            android:id="@+id/fg_home_tv_expert"
             android:layout_height="wrap_content"
             android:layout_width="50dp"
             android:gravity="center"
             android:layout_centerVertical="true"
             android:textSize="20sp"
             android:textColor="#030303"
-            android:layout_toRightOf="@id/tv_center"
+            android:layout_toRightOf="@id/fg_home_tv_center"
             android:layout_marginLeft="10dp"
             android:text="科普"/>
         <TextView
-            android:id="@+id/tv_answer_line"
+            android:id="@+id/fg_home_tv_answer_line"
             android:layout_width="wrap_content"
             android:layout_height="5dp"
             android:background="#47C6C3"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@id/tv_answer"
-            android:layout_alignRight="@id/tv_answer"
+            android:layout_alignLeft="@id/fg_home_tv_answer"
+            android:layout_alignRight="@id/fg_home_tv_answer"
             android:visibility="invisible"/>
         <TextView
-            android:id="@+id/tv_expert_line"
+            android:id="@+id/fg_home_tv_expert_line"
             android:layout_width="wrap_content"
             android:layout_height="5dp"
             android:background="#47C6C3"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@id/tv_expert"
-            android:layout_alignRight="@id/tv_expert"
+            android:layout_alignLeft="@id/fg_home_tv_expert"
+            android:layout_alignRight="@id/fg_home_tv_expert"
             android:visibility="invisible"/>
 
     </RelativeLayout>
