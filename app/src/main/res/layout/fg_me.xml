@@ -79,6 +79,8 @@
 
     </LinearLayout>
     <ListView
+        android:id="@+id/fg_me_lv"
+        android:layout_marginTop="5dp"
         android:dividerHeight="1dp"
         android:divider="#4c979797"
         android:layout_width="match_parent"
