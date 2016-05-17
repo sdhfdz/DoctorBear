@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--主题色-->
-    <color name="colorMain">#47C6C3</color>
+    <color name="colorMain">#47c6c3</color>
+    
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorPressed">#47C6C3</color>
@@ -12,6 +13,6 @@
     <color name="colorGrayTitleBG">#f7f7f7</color>
     <!--从命名不知道颜色用途，请尽量更改或删除-->
     <color name="colorAccent">#f7f7f7</color>
-    <!--所有分割线的颜色-->
+    <!--所有分割线的颜色，透明度76-->
     <color name="colorRuleLine">#4c979797</color>
 </resources>
