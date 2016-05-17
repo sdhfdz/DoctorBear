@@ -12,7 +12,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#47C6C3"
             android:layout_centerInParent="true"
             android:text="我"
             android:textSize="20sp"
@@ -42,6 +41,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/me_fav_icon"/>
         <TextView
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的收藏"/>
@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/me_tack_icon"/>
             <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的订阅"/>
@@ -72,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/me_note_icon"/>
             <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的消息"/>
@@ -79,6 +81,7 @@
 
     </LinearLayout>
     <ListView
+
         android:id="@+id/fg_me_lv"
         android:layout_marginTop="5dp"
         android:dividerHeight="1dp"
