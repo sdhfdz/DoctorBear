@@ -2,12 +2,9 @@
 <resources>
     <!--主题色-->
     <color name="colorMain">#47C6C3</color>
-
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
     <color name="colorPressed">#47C6C3</color>
-    <color name="colorMain">#47C6C3</color>
     <color name="colorNormal">#A2A8B4</color>
     <!--用于标题栏字色-->
     <color name="colorGrayFont">#9b9b9b</color>
