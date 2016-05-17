@@ -8,34 +8,37 @@
        android:layout_height="44dp"
        android:gravity="center"
        android:weightSum="1"
-       android:background="@color/colorBackground"
+       android:background="@color/colorGrayTitleBG"
        android:orientation="horizontal">
        <ImageView
            android:layout_marginLeft="11dp"
            android:layout_marginRight="11dp"
-           android:layout_width="20dp"
-           android:layout_height="20dp"
-           android:src="@drawable/fg_home_right_search"/>
+           android:layout_width="15dp"
+           android:layout_height="15dp"
+           android:src="@mipmap/index_home_right_search"/>
        <EditText
+           android:id="@+id/activity_fg_home_search_et_search"
            android:imeOptions="actionSearch"
            android:layout_width="0dp"
            android:layout_weight="1"
            android:layout_height="wrap_content"
-           android:textSize="16sp"
+           android:textSize="12sp"
            android:background="@null"
            android:cursorVisible="false"
            android:hint="@string/activityfghomesearch"/>
        <TextView
+           android:id="@+id/activity_fg_home_search_tv_cancel"
            android:layout_marginLeft="11dp"
            android:layout_marginRight="11dp"
            android:layout_width="40dp"
            android:layout_height="wrap_content"
-           android:textSize="16sp"
-           android:textColor="@color/colorCancel"
+           android:textSize="12sp"
+           android:textColor="@color/colorMain"
            android:text="@string/activity_fg_home_search_cancle"/>
    </LinearLayout>
     <TextView
+
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#979797"/>
+        android:background="#75979797"/>
 </LinearLayout>

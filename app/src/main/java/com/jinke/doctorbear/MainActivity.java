@@ -49,7 +49,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         //新建Indicator，并设置Indicator属性
         IndicatorHome = new TabIndicatorView(this);
         IndicatorHome.setTabTitle("首页");
-        IndicatorHome.setTabIcon(R.drawable.tab_home_normal, R.drawable.tab_home_focus);
+        IndicatorHome.setTabIcon(R.mipmap.doctor_bear_tabbar_index, R.mipmap.doctor_bear_tabbar_index_on);
         spec.setIndicator(IndicatorHome);
         //添加TabSpec
         tabHost.addTab(spec, HomeFragment.class, null);
@@ -57,21 +57,21 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         spec = tabHost.newTabSpec(TAB_SEARCH);
         IndicatorSearch = new TabIndicatorView(this);
         IndicatorSearch.setTabTitle("搜索");
-        IndicatorSearch.setTabIcon(R.drawable.tab_search_normal, R.drawable.tab_search_focus);
+        IndicatorSearch.setTabIcon(R.mipmap.doctor_bear_tabbar_search, R.mipmap.doctor_bear_tabbar_search_on);
         spec.setIndicator(IndicatorSearch);
         tabHost.addTab(spec, SearchFragment.class, null);
 
         spec = tabHost.newTabSpec(TAB_DOCTOR);
         IndicatorDiscover = new TabIndicatorView(this);
         IndicatorDiscover.setTabTitle("熊大夫");
-        IndicatorDiscover.setTabIcon(R.drawable.tab_doctor_normal, R.drawable.tab_doctor_focus);
+        IndicatorDiscover.setTabIcon(R.mipmap.doctor_bear_tabbar_bear, R.mipmap.doctor_bear_tabbar_bear_on);
         spec.setIndicator(IndicatorDiscover);
         tabHost.addTab(spec, DoctorFragment.class, null);
 
         spec = tabHost.newTabSpec(TAB_ME);
         IndicatorMe = new TabIndicatorView(this);
         IndicatorMe.setTabTitle("我");
-        IndicatorMe.setTabIcon(R.drawable.tab_me_normal, R.drawable.tab_me_focus);
+        IndicatorMe.setTabIcon(R.mipmap.doctor_bear_tabbar_me, R.mipmap.doctor_bear_tabbar_me_on);
         spec.setIndicator(IndicatorMe);
         tabHost.addTab(spec, MeFragment.class, null);
 

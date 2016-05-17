@@ -9,7 +9,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
-        android:src="@drawable/fg_home_expert_lv_baby"/>
+        android:src="@mipmap/fg_home_expert_lv_baby"/>
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:id="@+id/fg_home_expert_lv_iv_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/head"/>
+            android:src="@mipmap/head"/>
         <TextView
             android:id="@+id/fg_home_expert_lv_tv_nickname"
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/fg_home_like"/>
+            android:src="@mipmap/fg_home_like"/>
         <TextView
             android:id="@+id/fg_home_expert_lv_tv_like"
             android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
 
             android:layout_marginLeft="15dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/fg_home_comment"/>
+            android:src="@mipmap/fg_home_comment"/>
         <TextView
             android:id="@+id/fg_home_expert_lv_tv_comment"
             android:layout_width="wrap_content"

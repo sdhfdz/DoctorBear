@@ -5,22 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
 import com.jinke.doctorbear.Activity.HomeTextEdit;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
-import com.jinke.doctorbear.Utils.ScrollListView;
 import com.jinke.doctorbear.Utils.NoScrollViewPager;
 
 /**
@@ -54,6 +48,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 		tv_expert_line = (TextView)view.findViewById(R.id.fg_home_tv_expert_line);
 		iv_search = (ImageView) view.findViewById(R.id.fg_home_iv_search);
 
+
 		boolean page = sp.getBoolean("page",true);
 		if (page){
 			changeColorAndPage(0);
@@ -86,6 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 			case R.id.fg_home_iv_search:
 				Intent intent = new Intent(v.getContext(), FgHomeSearchActivity.class);
 				startActivity(intent);
+//				getActivity().overridePendingTransition(R.anim.alphain, R.anim.alphaout);
 			default:
 				break;
 		}
