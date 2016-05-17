@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
+import com.jinke.doctorbear.Activity.HomeTextEdit;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.NoScrollViewPager;
@@ -28,6 +28,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 	private TextView tv_answer_line;
 	private TextView tv_expert_line;
 	private ImageView iv_search;
+	private ImageView iv_edit;
 	SharedPreferences sp;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 		tv_answer_line = (TextView)view.findViewById(R.id.fg_home_tv_answer_line);
 		tv_expert_line = (TextView)view.findViewById(R.id.fg_home_tv_expert_line);
 		iv_search = (ImageView) view.findViewById(R.id.fg_home_iv_search);
-
+		iv_edit = (ImageView)view.findViewById(R.id.fg_home_iv_edit);
 
 		boolean page = sp.getBoolean("page",true);
 		if (page){
@@ -61,6 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 		tv_answer.setOnClickListener(this);
 		tv_expert.setOnClickListener(this);
 		iv_search.setOnClickListener(this);
+		iv_edit.setOnClickListener(this);
 	}
 	@Override
 
@@ -74,10 +76,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 				changeColorAndPage(1);
 				sp.edit().putBoolean("page",false).commit();
 				break;
+			case R.id.fg_home_iv_edit:
+				Intent intent_edit = new Intent(v.getContext(), HomeTextEdit.class);
+				startActivity(intent_edit);
 			case R.id.fg_home_iv_search:
 				Intent intent = new Intent(v.getContext(), FgHomeSearchActivity.class);
 				startActivity(intent);
-//				getActivity().overridePendingTransition(R.anim.alphain, R.anim.alphaout);
+				getActivity().overridePendingTransition(R.anim.alphain, R.anim.alphaout);
 			default:
 				break;
 		}

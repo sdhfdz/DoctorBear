@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="#F7F7F7">
-        <ImageView
+        <ImageView android:id="@+id/fg_home_iv_edit"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"

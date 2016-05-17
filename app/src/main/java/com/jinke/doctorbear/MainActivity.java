@@ -1,11 +1,15 @@
 package com.jinke.doctorbear;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TabHost;
 
+import com.jinke.doctorbear.Activity.HomeTextEdit;
 import com.jinke.doctorbear.Fragment.DoctorFragment;
 import com.jinke.doctorbear.Fragment.HomeFragment;
 import com.jinke.doctorbear.Fragment.MeFragment;
@@ -27,6 +31,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     private TabIndicatorView IndicatorDiscover;
     private TabIndicatorView IndicatorMe;
 
+    private ImageView edit_imageV ;
     private FragmentTabHost tabHost;
     SharedPreferences sp;
     @Override
@@ -41,6 +46,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         initListener();
     }
     private void initView() {
+       edit_imageV =(ImageView)findViewById(R.id.fg_home_iv_edit);
+
         //初始化TabHost
         tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
@@ -82,13 +89,24 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         IndicatorHome.setTabSelected(true);
     }
     private void initListener() {
+
         tabHost.setOnTabChangedListener(this);
     }
 
-    /**
-     * Indicator状态改变监听
-     * @param tag Indicator对应的标签
-     */
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fg_home_iv_edit:
+                Intent intent = new Intent(this, HomeTextEdit.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+
+            /**
+             * Indicator状态改变监听
+             * @param tag Indicator对应的标签
+             */
     public void onTabChanged(String tag) {
         //将四个Indicator选中状态全部置为false
         IndicatorHome.setTabSelected(false);
