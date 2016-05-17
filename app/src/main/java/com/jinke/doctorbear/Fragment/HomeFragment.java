@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
 import com.jinke.doctorbear.Activity.HomeTextEdit;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
@@ -79,10 +80,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 			case R.id.fg_home_iv_edit:
 				Intent intent_edit = new Intent(v.getContext(), HomeTextEdit.class);
 				startActivity(intent_edit);
+				break;
 			case R.id.fg_home_iv_search:
 				Intent intent = new Intent(v.getContext(), FgHomeSearchActivity.class);
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.alphain, R.anim.alphaout);
+				break;
 			default:
 				break;
 		}
