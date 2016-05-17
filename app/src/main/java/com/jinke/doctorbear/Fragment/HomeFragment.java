@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
 import com.jinke.doctorbear.Activity.HomeTextEdit;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;

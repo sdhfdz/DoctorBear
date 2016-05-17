@@ -15,4 +15,5 @@
     <color name="colorAccent">#f7f7f7</color>
     <!--所有分割线的颜色，透明度76-->
     <color name="colorRuleLine">#4c979797</color>
+    <color name="colorCancle">#000</color>
 </resources>
