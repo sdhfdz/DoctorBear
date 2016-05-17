@@ -110,14 +110,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
-                android:src="@drawable/send_pic"/>
+                android:src="@mipmap/send_pic"/>
             <ImageView android:id="@+id/home_edit_set_iV"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginLeft="1dp"
                 android:background="#FFFFFF"
-                android:src="@drawable/send_font"/>
+                android:src="@mipmap/send_font"/>
 
             <ImageView android:id="@+id/home_edit_keybroad_iV"
                 android:layout_width="0px"
@@ -125,7 +125,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="1dp"
                 android:background="#FFFFFF"
-                android:src="@drawable/send_keybroad"/>
+                android:src="@mipmap/send_keybroad"/>
         </LinearLayout>
 
     </LinearLayout>
