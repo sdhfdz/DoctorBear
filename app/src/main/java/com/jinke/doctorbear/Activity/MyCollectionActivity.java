@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jinke.doctorbear.Adapter.AdpMyCollection;
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.NoScrollViewPager;
 
 /**
  * Created by QZ on 2016/5/17.
@@ -20,7 +21,7 @@ public class MyCollectionActivity extends Activity implements View.OnClickListen
     private TextView mycoll_answer_line_tv;
     private TextView mycoll_expert_tv;
     private TextView mycoll_expert_line_tv;
-    private ViewPager mycoll_vp;
+    private NoScrollViewPager mycoll_vp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class MyCollectionActivity extends Activity implements View.OnClickListen
         mycoll_answer_line_tv = (TextView) findViewById(R.id.mycollection_answer_line_tv);
         mycoll_expert_tv = (TextView) findViewById(R.id.mycollection_expert_tv);
         mycoll_expert_line_tv = (TextView) findViewById(R.id.mycollection_expert_line_tv);
-        mycoll_vp = (ViewPager) findViewById(R.id.mycollection_vp);
+        mycoll_vp = (NoScrollViewPager) findViewById(R.id.mycollection_vp);
         mycoll_vp.setAdapter(new AdpMyCollection(this));
         changeColorAndPage(0);
     }
