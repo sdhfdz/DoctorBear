@@ -1,5 +1,6 @@
 package com.jinke.doctorbear.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.jinke.doctorbear.Activity.MyCollectionActivity;
 import com.jinke.doctorbear.Adapter.AdpMeFglv;
 import com.jinke.doctorbear.R;
 
@@ -47,7 +49,8 @@ public class MeFragment extends Fragment implements View.OnClickListener{
 
 		switch (v.getId()){
 			case R.id.ll_mycollection:
-				System.out.println("我的收藏");
+				Intent intent = new Intent(getContext(), MyCollectionActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.ll_mysubscription:
 				System.out.println("我的订阅");
