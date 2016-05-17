@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.FgHomeSearchActivity"></activity>
-        <activity android:name=".Activity.MyCollectionActivity"></activity>
+        <activity android:name=".Activity.HomeTextEdit"></activity>
     </application>
 
 </manifest>
