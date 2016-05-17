@@ -11,7 +11,7 @@
             android:id="@+id/fg_home_answer_lv_iv_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/head"/>
+            android:src="@mipmap/head"/>
         <TextView
             android:id="@+id/fg_home_answer_lv_tv_nickname"
             android:layout_width="wrap_content"
@@ -58,13 +58,13 @@
             android:gravity="center"
             android:text="神经科"
             android:textSize="11sp"
-            android:background="@drawable/fg_home_illness_category_bg"/>
+            android:background="@mipmap/fg_home_illness_category_bg"/>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/fg_home_comment"/>
+            android:src="@mipmap/fg_home_comment"/>
         <TextView
             android:id="@+id/fg_home_answer_lv_tv_comment"
             android:layout_width="wrap_content"

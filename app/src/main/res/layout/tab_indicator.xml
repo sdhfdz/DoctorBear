@@ -13,7 +13,7 @@
             android:id="@+id/tab_indicator_icon"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:src="@drawable/tab_me_normal" />
+            android:src="@mipmap/doctor_bear_tabbar_me" />
 
         <TextView
             android:layout_marginTop="3dp"

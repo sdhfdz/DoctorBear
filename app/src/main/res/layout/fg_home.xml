@@ -13,7 +13,7 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="13dp"
-            android:src="@drawable/fg_home_left_edit"/>
+            android:src="@mipmap/fg_home_left_edit"/>
         <ImageView
             android:id="@+id/fg_home_iv_search"
             android:layout_width="25dp"
@@ -21,7 +21,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="13dp"
-            android:src="@drawable/fg_home_right_search"/>
+            android:src="@mipmap/fg_home_right_search"/>
         <TextView
             android:id="@+id/fg_home_tv_center"
             android:layout_height="wrap_content"

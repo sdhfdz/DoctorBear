@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha
+        android:fromAlpha="1.0"
+        android:duration="500"
+        android:toAlpha="0.0" />
+</set>
+
+    <!--
+    fromAlpha与toAlpha表示看得到还是看不到值为0.0到1.0之间。
+    (1)0.0表示完全看不到（完全透明）
+    (2)1.0表示完全看得到(完全不透明)
+    本文件中的配置表示由在5000ms内，逐渐由完全看得到至完全看不到的过程，
+    换一种说法就是在5000ms内，逐渐由完全不透明到完全透明的过程。
+     -->
