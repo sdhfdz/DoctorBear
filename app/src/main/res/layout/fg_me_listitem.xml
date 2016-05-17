@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:padding="5dp"
     android:layout_height="match_parent">
 
 
@@ -28,14 +29,16 @@
                 android:layout_marginLeft="15dp"
                 android:text="呼吸内科"
                 android:textSize="12sp"
+                android:layout_centerVertical="true"
                 android:background="@drawable/fg_me_type"
                 android:layout_width="80dp"
-                android:layout_height="30dp"/>
+                android:layout_height="26dp"/>
 
 
 
         </RelativeLayout>
         <TextView
+            android:ellipsize="end"
             android:textSize="15sp"
             android:singleLine="true"
             android:layout_marginLeft="5dp"
@@ -43,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="调整好心情，更有利于降压"/>
         <TextView
+            android:ellipsize="end"
             android:textSize="15sp"
             android:singleLine="true"
             android:layout_marginLeft="5dp"
@@ -68,11 +72,5 @@
             android:textColor="#FFFFFF"
             android:text="+   订阅"/>
     </LinearLayout>
-
-
-
-
-
-
 
 </LinearLayout>
