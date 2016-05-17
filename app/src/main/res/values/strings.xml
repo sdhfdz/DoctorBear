@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">熊大夫</string>
+    <string name="activity_fg_home_search_cancle">取消</string>
+    <string name="activityfghomesearch"><![CDATA[搜索<问答>相关内容]]></string>
 </resources>

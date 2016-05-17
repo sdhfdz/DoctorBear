@@ -1,5 +1,8 @@
 package com.jinke.doctorbear.Fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -8,11 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
+import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
-import com.jinke.doctorbear.Utils.MyListView;
+import com.jinke.doctorbear.Utils.ScrollListView;
 import com.jinke.doctorbear.Utils.NoScrollViewPager;
 
 /**
@@ -26,11 +33,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 	private TextView tv_expert;
 	private TextView tv_answer_line;
 	private TextView tv_expert_line;
-
+	private ImageView iv_search;
+	SharedPreferences sp;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg_home, container, false);
+		sp = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE);
 		initView(view);
 		initListener();
 		return view;
@@ -38,176 +47,64 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 	private void initView(View view) {
 		viewPager = (NoScrollViewPager) view.findViewById(R.id.viewpager);
-		tv_answer = (TextView) view.findViewById(R.id.tv_answer);
-		tv_expert = (TextView) view.findViewById(R.id.tv_expert);
-		tv_answer_line = (TextView)view.findViewById(R.id.tv_answer_line);
-		tv_expert_line = (TextView)view.findViewById(R.id.tv_expert_line);
-		tv_answer.setTextColor(this.getResources().getColor(R.color.colorPressed));
-		tv_answer_line.setVisibility(View.VISIBLE);
-		viewPager.setAdapter(new MyAdapter());
+		tv_answer = (TextView) view.findViewById(R.id.fg_home_tv_answer);
+		tv_expert = (TextView) view.findViewById(R.id.fg_home_tv_expert);
+		tv_answer_line = (TextView)view.findViewById(R.id.fg_home_tv_answer_line);
+		tv_expert_line = (TextView)view.findViewById(R.id.fg_home_tv_expert_line);
+		iv_search = (ImageView) view.findViewById(R.id.fg_home_iv_search);
+
+		boolean page = sp.getBoolean("page",true);
+		if (page){
+			changeColorAndPage(0);
+		}else {
+			changeColorAndPage(1);
+		}
+		viewPager.setAdapter(new AdpHomeFgMain(view.getContext()));
 
 	}
 	private void initListener() {
 		tv_answer.setOnClickListener(this);
 		tv_expert.setOnClickListener(this);
+		iv_search.setOnClickListener(this);
 	}
 	@Override
+
 	public void onClick(View v) {
 		switch (v.getId()){
-			case R.id.tv_answer:
-				viewPager.setCurrentItem(0,false);
-				changeColor(0);
+			case R.id.fg_home_tv_answer:
+				changeColorAndPage(0);
+				sp.edit().putBoolean("page",true).commit();
 				break;
-			case R.id.tv_expert:
-				viewPager.setCurrentItem(1,false);
-				changeColor(1);
+			case R.id.fg_home_tv_expert:
+				changeColorAndPage(1);
+				sp.edit().putBoolean("page",false).commit();
 				break;
+			case R.id.fg_home_iv_search:
+				Intent intent = new Intent(v.getContext(), FgHomeSearchActivity.class);
+				startActivity(intent);
 			default:
 				break;
 		}
 	}
 
 	/**
-	 * 点击问答和科普改变颜色和下划线
+	 * 点击问答和科普改变颜色和页面
 	 * @param position
      */
-	public void changeColor(int position){
+	public void changeColorAndPage(int position){
 		if (position==0){
 			tv_answer.setTextColor(getContext().getResources().getColor(R.color.colorPressed));
 			tv_expert.setTextColor(getContext().getResources().getColor(R.color.colorNormal));
 			tv_answer_line.setVisibility(View.VISIBLE);
 			tv_expert_line.setVisibility(View.INVISIBLE);
+			viewPager.setCurrentItem(0,false);
 		}
 		if (position==1){
 			tv_answer.setTextColor(getContext().getResources().getColor(R.color.colorNormal));
 			tv_expert.setTextColor(getContext().getResources().getColor(R.color.colorPressed));
 			tv_answer_line.setVisibility(View.INVISIBLE);
 			tv_expert_line.setVisibility(View.VISIBLE);
-		}
-	}
-
-	/**
-	 * 主界面ViewPager适配器，只有两个界面
-	 * 一个问答界面，一个科普界面
-	 */
-	class MyAdapter extends PagerAdapter {
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return 2;
-		}
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view==object;
-		}
-		public Object instantiateItem(ViewGroup container, int position) {
-			View view = null;
-			//问答界面
-			if (position==0){
-				view = View.inflate(getContext(), R.layout.fg_home_answer,null);
-				ListView listView_answer = (ListView) view.findViewById(R.id.fg_home_answer_lv);
-				listView_answer.setAdapter(new AnswerLvAdapter());
-			}
-			//科普界面
-			if (position==1){
-				view = View.inflate(getContext(), R.layout.fg_home_expert,null);
-				MyListView listView_expert = (MyListView) view.findViewById(R.id.fg_home_expert_lv);
-				ViewPager viewPager_expert = (ViewPager)view.findViewById(R.id.fg_home_expert_vp);
-				viewPager_expert.setAdapter(new ExpertVpAdapter());
-				listView_expert.setAdapter(new ExpertLvAdapter());
-
-			}
-			container.addView(view);
-			return view;
-		}
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object) {
-			super.destroyItem(container, position, object);
-			container.removeView((View) object);
-		}
-	}
-
-	/**
-	 * 科普界面ViewPager的适配器
-	 */
-	class ExpertVpAdapter extends PagerAdapter {
-
-		@Override
-		public int getCount() {
-			return 4;
-		}
-
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view==object;
-		}
-
-		@Override
-		public Object instantiateItem(ViewGroup container, int position) {
-			View view = View.inflate(getContext(), R.layout.fg_home_expert_vp_item,null);
-			container.addView(view);
-			return view;
-		}
-
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object) {
-			//super.destroyItem(container, position, object);
-			container.removeView((View) object);
-		}
-	}
-
-	/**
-	 * 科普界面ListView的适配器
-	 */
-	class ExpertLvAdapter extends BaseAdapter{
-
-		@Override
-		public int getCount() {
-			return 5;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = View.inflate(getContext(), R.layout.fg_home_expert_lv_item,null);
-			return view;
-		}
-	}
-
-	/**
-	 * 问答界面ListView的适配器
-	 */
-	class AnswerLvAdapter extends BaseAdapter{
-
-		@Override
-		public int getCount() {
-			return 5;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = View.inflate(getContext(), R.layout.fg_home_answer_lv_item,null);
-			return view;
+			viewPager.setCurrentItem(1,false);
 		}
 	}
 }
