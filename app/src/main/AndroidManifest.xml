@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.FgHomeSearchActivity"></activity>
+        <activity android:name=".Activity.MyCollectionActivity"></activity>
     </application>
 
 </manifest>
