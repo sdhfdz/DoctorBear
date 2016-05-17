@@ -15,12 +15,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Model.FgHomeAnswerModel;
 import com.jinke.doctorbear.R;
+import com.squareup.picasso.Picasso;
 
-class AdpHomeFgAnswer extends BaseAdapter {
+import java.util.List;
+
+public class AdpHomeFgAnswer extends BaseAdapter {
+    List<FgHomeAnswerModel> list;
     Context context;
+    boolean data;
 
-    public AdpHomeFgAnswer(Context context) {
+    public AdpHomeFgAnswer(Context context,List<FgHomeAnswerModel> list) {
+        this.list = list;
+        this.context = context;
+    }
+
+    public AdpHomeFgAnswer(Context context,List<FgHomeAnswerModel> list, boolean data ) {
+        this.list = list;
+        this.data = data;
         this.context = context;
     }
 
@@ -58,6 +71,27 @@ class AdpHomeFgAnswer extends BaseAdapter {
 
     private void init(ViewHolder holder, View convertView, int position) {
         initView(holder,convertView,position);
+        initData(holder,position);
+    }
+
+    /**
+     * 初始化listview数据
+     * @param holder
+     * @param position
+     */
+    private void initData(ViewHolder holder,  int position) {
+        if(data) {
+            FgHomeAnswerModel fgHomeAnswerModel = list.get(position);
+            if (fgHomeAnswerModel == null) {
+                return;
+            }
+            holder.comment.setText(fgHomeAnswerModel.getComment());
+            holder.nickName.setText(fgHomeAnswerModel.getNickName());
+            holder.answerTitle.setText(fgHomeAnswerModel.getAnswerTitle());
+            holder.illness.setText(fgHomeAnswerModel.getIllness());
+            holder.answerContent.setText(fgHomeAnswerModel.getAnswerContent());
+            Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
+        }
     }
 
     /**
