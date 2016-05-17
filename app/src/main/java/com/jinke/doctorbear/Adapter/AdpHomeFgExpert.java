@@ -6,20 +6,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Model.FgHomeExpertModel;
 import com.jinke.doctorbear.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 /**
  * 科普界面ListView的适配器
  * Created by Max on 2016/5/16.
  */
 public class AdpHomeFgExpert extends BaseAdapter {
-    Context context;
 
-    public AdpHomeFgExpert(Context context) {
+    public List<FgHomeExpertModel> list;
+    Context context;
+    boolean data;
+
+    public AdpHomeFgExpert(Context context,List<FgHomeExpertModel> list) {
+        this.list = list;
         this.context = context;
+    }
+
+    public AdpHomeFgExpert( Context context, List<FgHomeExpertModel> list, boolean data) {
+        this.list = list;
+        this.context = context;
+        this.data = data;
     }
 
     @Override
@@ -57,8 +70,29 @@ public class AdpHomeFgExpert extends BaseAdapter {
 
     private void init(ViewHolder holder, View convertView, int position) {
         initView(holder,convertView,position);
+        initData(holder,position);
     }
+    /**
+     * 初始化listview数据
+     * @param holder
+     * @param position
+     */
+    private void initData(ViewHolder holder,  int position) {
+        if (data) {
+            FgHomeExpertModel fgHomeExpertModel = list.get(position);
+            if (fgHomeExpertModel == null) {
+                return;
+            }
+            holder.comment.setText(fgHomeExpertModel.getComment());
+            holder.nickName.setText(fgHomeExpertModel.getNickName());
+            holder.like.setText(fgHomeExpertModel.getLike());
+            holder.expertTitle.setText(fgHomeExpertModel.getExpertTitle());
+            holder.time.setText(fgHomeExpertModel.getTime());
+            Picasso.with(context).load(fgHomeExpertModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
+            Picasso.with(context).load(fgHomeExpertModel.getIv_headImage()).error(R.mipmap.logo).into(holder.expertPicture);
 
+        }
+    }
     /**
      * 初始化所有控件
      * @param holder
