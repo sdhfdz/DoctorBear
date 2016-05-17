@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
+import com.jinke.doctorbear.Activity.HomeTextEdit;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.ScrollListView;
@@ -79,6 +80,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 				changeColorAndPage(1);
 				sp.edit().putBoolean("page",false).commit();
 				break;
+			case R.id.fg_home_iv_edit:
+				Intent intent_edit = new Intent(v.getContext(), HomeTextEdit.class);
+				startActivity(intent_edit);
 			case R.id.fg_home_iv_search:
 				Intent intent = new Intent(v.getContext(), FgHomeSearchActivity.class);
 				startActivity(intent);
