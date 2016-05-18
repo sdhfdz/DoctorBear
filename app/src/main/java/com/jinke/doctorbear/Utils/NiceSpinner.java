@@ -22,14 +22,17 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 /**
  * @author angelo.marchesin
  */
-public class NiceSpinner extends TextView {
+@SuppressWarnings("unused")
+public class NiceSpinner extends TextView  {
 
     private static final int MAX_LEVEL = 10000;
     private static final int DEFAULT_ELEVATION = 16;
@@ -128,8 +131,8 @@ public class NiceSpinner extends TextView {
         //hide vertical and horizontal scrollbars
         listView.setVerticalScrollBarEnabled(false);
         listView.setHorizontalScrollBarEnabled(false);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position >= selectedIndex && position < adapter.getCount()) {
@@ -147,12 +150,12 @@ public class NiceSpinner extends TextView {
                 if (onItemSelectedListener != null) {
                     onItemSelectedListener.onItemSelected(parent, view, position, id);
                 }
-
                 adapter.notifyItemSelected(position);
                 setText(adapter.getItemInDataset(position).toString());
                 dismissDropDown();
             }
         });
+
 
         popupWindow = new PopupWindow(context);
         popupWindow.setContentView(listView);
@@ -201,7 +204,7 @@ public class NiceSpinner extends TextView {
      * 
      * @param position the item's position
      */
-    public void setSelectedIndex(int position) {
+    public void setSelectedIFndex(int position) {
         if (adapter != null) {
             if (position >= 0 && position <= adapter.getCount()) {
                 adapter.notifyItemSelected(position);
@@ -269,7 +272,12 @@ public class NiceSpinner extends TextView {
         if (!isArrowHide) {
             animateArrow(false);
         }
-        popupWindow.dismiss();
+        if(getSelectedIndex() == 0 ){
+            Toast.makeText(this.getContext(), "请选择问题分类", Toast.LENGTH_SHORT).show();
+
+        }
+        else
+            popupWindow.dismiss();
     }
 
     public void showDropDown() {

@@ -11,12 +11,12 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.FgHomeSearchActivity"></activity>
-        <activity android:name=".Activity.HomeTextEdit"></activity>
+        <activity android:name=".Activity.HomeTextEdit"
+            android:windowSoftInputMode="stateVisible|adjustResize" ></activity>
         <activity android:name=".Activity.MyCollectionActivity"/>
     </application>
 

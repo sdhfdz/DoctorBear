@@ -11,6 +11,8 @@
     android:paddingBottom="@dimen/one_and_a_half_grid_unit"
     android:paddingTop="@dimen/one_and_a_half_grid_unit"
     android:singleLine="true"
-    android:textSize="15sp"
-    tools:textColor="@android:color/black"
+    android:textSize="12sp"
+    android:textColor="@color/colorGrayFont"
+    android:background="#FFFFFF"
     tools:text="Item"/>
+    <!--tools:textColor="@android:color/black"-->
