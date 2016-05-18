@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 				getActivity().overridePendingTransition(R.anim.alphain, R.anim.alphaout);
 				break;
 			default:
-
+				break;
 		}
 	}
 
