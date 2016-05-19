@@ -2,14 +2,182 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="#7ed3f9"
     android:orientation="vertical" >
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fragment Search"
-        android:textSize="18sp" />
+        android:background="@color/colorMain"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="300dp"
+            android:layout_height="44dp"
+            android:weightSum="1"
+            android:background="@drawable/corners"
+            android:gravity="center">
+            <ImageView
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/index_home_right_search"/>
+            <EditText
+                android:id="@+id/fg_search_et_search"
+                android:background="@null"
+                android:textColor="@color/colorGrayFont"
+                android:textSize="14sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:imeOptions="actionSearch"
+                android:cursorVisible="false"
+                android:layout_height="match_parent"
+                android:hint="综合搜索"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:weightSum="3"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/fg_search_iv_scan"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/search_san_icon"/>
+            <ImageView
+                android:id="@+id/fg_search_iv_disease"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/search_disease_icon"/>
+            <ImageView
+                android:id="@+id/fg_search_iv_capsule"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/search_capsule_icon"/>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:layout_marginBottom="30dp"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/fg_search_iv_hospital"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/search_hospital_icon"/>
+            <ImageView
+                android:id="@+id/fg_search_iv_location"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/search_location_icon"/>
+            <ImageView
+                android:id="@+id/fg_search_iv_putian"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/search_putian_icon"/>
+        </LinearLayout>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:src="@mipmap/search_hot_search_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热搜"
+            android:textSize="12sp"
+            android:textColor="@color/colorMain"/>
+
+    </LinearLayout>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#75979797"/>
+
+        >
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/fg_search_tv_hot1"
+                android:gravity="center"
+                android:layout_marginLeft="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="癌症预防"
+                android:textColor="@color/colorGrayFont"
+                android:textSize="12sp"
+               />
+            <TextView
+                android:id="@+id/fg_search_tv_hot2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="糖尿病"
+                android:textColor="@color/colorGrayFont"
+                android:textSize="12sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="143dp"
+                android:layout_marginEnd="143dp" />
+
+
+            <TextView
+
+                android:id="@+id/fg_search_tv_hot3"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="痛经"
+                android:textColor="@color/colorGrayFont"
+                android:textSize="12sp"
+                android:layout_below="@+id/fg_search_tv_hot1"
+                android:layout_alignLeft="@+id/fg_search_tv_hot1"
+                android:layout_alignStart="@+id/fg_search_tv_hot1"
+                android:layout_marginTop="20dp" />
+            <TextView
+                android:id="@+id/fg_search_tv_hot4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="腹泻"
+                android:textColor="@color/colorGrayFont"
+                android:textSize="12sp"
+                android:layout_alignTop="@+id/fg_search_tv_hot3"
+                android:layout_alignLeft="@+id/fg_search_tv_hot2"
+                android:layout_alignStart="@+id/fg_search_tv_hot2" />
+
+
+            <TextView
+                android:id="@+id/fg_search_tv_hot5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备孕"
+                android:textColor="@color/colorGrayFont"
+                android:textSize="12sp"
+                android:layout_below="@+id/fg_search_tv_hot3"
+                android:layout_alignLeft="@+id/fg_search_tv_hot3"
+                android:layout_alignStart="@+id/fg_search_tv_hot3"
+                android:layout_marginTop="20dp" />
+
+    </RelativeLayout>
 
 </LinearLayout>
