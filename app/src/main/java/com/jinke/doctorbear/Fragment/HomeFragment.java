@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
+import com.jinke.doctorbear.Activity.HomeSearchActivity;
 import com.jinke.doctorbear.Activity.HomeTextEdit;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.NoScrollViewPager;
-import com.jinke.doctorbear.Activity.FgHomeSearchActivity;
 
 /**
  * 主页面业务逻辑
@@ -83,7 +82,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 				startActivity(intent_edit);
 				break;
 			case R.id.fg_home_iv_search:
-				Intent intent = new Intent(v.getContext(), FgHomeSearchActivity.class);
+				Intent intent = new Intent(v.getContext(), HomeSearchActivity.class);
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.alphain, R.anim.alphaout);
 				break;

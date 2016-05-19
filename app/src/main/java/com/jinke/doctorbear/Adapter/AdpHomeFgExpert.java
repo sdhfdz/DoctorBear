@@ -18,36 +18,17 @@ import java.util.List;
  * 科普界面ListView的适配器
  * Created by Max on 2016/5/16.
  */
-public class AdpHomeFgExpert extends BaseAdapter {
+public class AdpHomeFgExpert extends AdpBase<FgHomeExpertModel> {
 
-    public List<FgHomeExpertModel> list;
-    Context context;
     boolean data;
 
     public AdpHomeFgExpert(Context context,List<FgHomeExpertModel> list) {
-        this.list = list;
-        this.context = context;
+        super(context,list);
     }
 
     public AdpHomeFgExpert( Context context, List<FgHomeExpertModel> list, boolean data) {
-        this.list = list;
-        this.context = context;
+        super(context,list);
         this.data = data;
-    }
-
-    @Override
-    public int getCount() {
-        return 5;
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
     }
 
     @Override

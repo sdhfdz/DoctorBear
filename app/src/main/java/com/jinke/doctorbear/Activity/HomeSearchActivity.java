@@ -25,7 +25,7 @@ import java.util.List;
  * 未完成问题:连接后台搜索
  * Created by Max on 2016/5/17.
  */
-public class FgHomeSearchActivity extends Activity implements View.OnClickListener{
+public class HomeSearchActivity extends Activity implements View.OnClickListener{
     private TextView tv_cancel;
     private EditText et_search;
     private ListView lv_search;
@@ -92,8 +92,8 @@ public class FgHomeSearchActivity extends Activity implements View.OnClickListen
      * 初始化控件
      */
     private void initView() {
-        tv_cancel = (TextView) findViewById(R.id.activity_fg_home_search_tv_cancel);
-        et_search = (EditText) findViewById(R.id.activity_fg_home_search_et_search);
+        tv_cancel = (TextView) findViewById(R.id.title_search_tv_cancel);
+        et_search = (EditText) findViewById(R.id.title_search_et_search);
         lv_search = (ListView) findViewById(R.id.activity_fg_home_search_lv);
     }
 
@@ -105,11 +105,11 @@ public class FgHomeSearchActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.activity_fg_home_search_tv_cancel:
+            case R.id.title_search_tv_cancel:
                 finish();
 //                overridePendingTransition(R.anim.alphaout,R.anim.alphain);
                 break;
-            case R.id.activity_fg_home_search_et_search:
+            case R.id.title_search_et_search:
                 et_search.setCursorVisible(true);
                 break;
         }

@@ -19,22 +19,19 @@ import com.jinke.doctorbear.Model.FgHomeAnswerModel;
 import com.jinke.doctorbear.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AdpHomeFgAnswer extends BaseAdapter {
-    List<FgHomeAnswerModel> list;
-    Context context;
+public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
     boolean data;
-
-    public AdpHomeFgAnswer(Context context,List<FgHomeAnswerModel> list) {
-        this.list = list;
-        this.context = context;
+    public AdpHomeFgAnswer(Context context, ArrayList<FgHomeAnswerModel> listAnswer) {
+        super(context,listAnswer);
     }
 
     public AdpHomeFgAnswer(Context context,List<FgHomeAnswerModel> list, boolean data ) {
-        this.list = list;
+        super(context,list);
         this.data = data;
-        this.context = context;
+
     }
 
     @Override
