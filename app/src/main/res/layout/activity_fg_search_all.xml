@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_search"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="常见疾病"
+            android:textSize="12sp"
+            android:textColor="@color/colorGrayFont"/>
+        <TextView
+            android:id="@+id/activity_fg_search_disease_tv1"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="糖尿病"
+            android:textSize="12sp"
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#75979797"/>
+        <TextView
+            android:id="@+id/activity_fg_search_disease_tv2"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="通风"
+            android:textSize="12sp"
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#75979797"/>
+        <TextView
+            android:id="@+id/activity_fg_search_disease_tv3"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="乙肝"
+            android:textSize="12sp"
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#75979797"/>
+        <TextView
+            android:id="@+id/activity_fg_search_disease_tv4"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="骨质疏松"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#75979797"/>
+
+        <TextView
+            android:id="@+id/activity_fg_search_disease_tv5"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="月经不调"
+            android:textSize="12sp"
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#75979797"/>
+
+    </LinearLayout>
+</LinearLayout>

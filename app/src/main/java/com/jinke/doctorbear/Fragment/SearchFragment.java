@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jinke.doctorbear.Activity.SearchAllActivity;
 import com.jinke.doctorbear.R;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
@@ -108,14 +109,26 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
 				startActivity(intent);
                 break;
             case R.id.fg_search_iv_disease:
+				Intent intent_disease = new Intent(getActivity(), SearchAllActivity.class);
+				intent_disease.putExtra("kind","disease");
+				startActivity(intent_disease);
                 break;
             case R.id.fg_search_iv_capsule:
+				Intent intent_capsule = new Intent(getActivity(), SearchAllActivity.class);
+				intent_capsule.putExtra("kind","capsule");
+				startActivity(intent_capsule);
                 break;
             case R.id.fg_search_iv_hospital:
+				Intent intent_hospital = new Intent(getActivity(), SearchAllActivity.class);
+				intent_hospital.putExtra("kind","hospital");
+				startActivity(intent_hospital);
                 break;
             case R.id.fg_search_iv_location:
                 break;
             case R.id.fg_search_iv_putian:
+				Intent intent_putian = new Intent(getActivity(), SearchAllActivity.class);
+				intent_putian.putExtra("kind","putian");
+				startActivity(intent_putian);
                 break;
             default:
                 break;
