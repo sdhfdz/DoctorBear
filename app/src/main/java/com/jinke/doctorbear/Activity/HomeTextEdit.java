@@ -175,13 +175,15 @@ public class HomeTextEdit extends Activity implements View.OnClickListener {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             count_textV.setText(s.length() + "字");
-            if(true){
-                //文本内容
-                SpannableString ss_blod = new SpannableString(s);
-                //粗体
-                ss_blod.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 5, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                main_editT.setText(ss_blod);
-            }
+            SpannableString ss_blod = new SpannableString(s);
+           // insertIntoEditText(ss_blod);
+//            if(true){
+//                //文本内容
+//                SpannableString ss_blod = new SpannableString(s);
+//                //粗体
+//                ss_blod.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 5, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                main_editT.setText(ss_blod);
+//            }
 
         }
         @Override
@@ -231,8 +233,8 @@ public class HomeTextEdit extends Activity implements View.OnClickListener {
                     Toast.makeText(HomeTextEdit.this, originalUri.toString(), Toast.LENGTH_SHORT).show();
                     try {
                         Bitmap originalBitmap = BitmapFactory.decodeStream(resolver.openInputStream(originalUri));
-                    //    bitmap = originalBitmap;
-                        bitmap = resizeImage(originalBitmap, 100, 100);
+                        bitmap = originalBitmap;
+                     //   bitmap = resizeImage(originalBitmap, 100, 100);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
