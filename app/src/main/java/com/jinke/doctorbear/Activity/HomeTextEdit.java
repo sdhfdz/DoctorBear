@@ -2,11 +2,13 @@ package com.jinke.doctorbear.Activity;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,9 +16,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.style.ImageSpan;
+import android.text.style.StyleSpan;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -50,7 +56,9 @@ public class HomeTextEdit extends Activity implements View.OnClickListener {
     private ImageView keyboard_imageV;
     private Bitmap bitmap;
 
+    private boolean if_focusTitleEdit;
     private ArrayAdapter<String> arrayAdapter;
+    private  InputMethodManager imm;
 
 
     @Override
@@ -86,6 +94,11 @@ public class HomeTextEdit extends Activity implements View.OnClickListener {
         List<String> dataset = new LinkedList<>(Arrays.asList("疾病分类", "普外科", "骨科",
                 "眼科", "消化科","心脏内科", "神经内科","儿科","皮肤科"," 肿瘤科"));
         niceSpinner.attachDataSource(dataset);
+
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        //获取焦点
+        if_focusTitleEdit = true;
+        title_editT.requestFocus();
     }
 
     /**
@@ -98,6 +111,17 @@ public class HomeTextEdit extends Activity implements View.OnClickListener {
         set_imageV.setOnClickListener(this);
         keyboard_imageV.setOnClickListener(this);
 
+        main_editT.addTextChangedListener(new EditChangedListener());
+        title_editT.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                if_focusTitleEdit = true;
+            }
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                if_focusTitleEdit = false;
+            }
+        });
     }
 
     /**
@@ -117,8 +141,61 @@ public class HomeTextEdit extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.home_edit_add_iV:
-                goPhotoChooser();
+                if(if_focusTitleEdit)
+                {
+                    goPhotoChooser();
+                }
+                else
+                    Toast.makeText(v.getContext(), "标题栏不能插入图片啦", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.home_edit_keybroad_iV:
+                //手动隐藏或弹出键盘
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                break;
+            case R.id.home_edit_set_iV:
+
+
+        }
+
+    }
+
+    private void setBlod() {
+
+    }
+    class EditChangedListener implements TextWatcher {
+        private CharSequence temp;//监听前的文本
+        private int editStart;//光标开始位置
+        private int editEnd;//光标结束位置
+        private final int charMaxNum = 1000;
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            temp = s;
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            count_textV.setText(s.length() + "字");
+            if(true){
+                //文本内容
+                SpannableString ss_blod = new SpannableString(s);
+                //粗体
+                ss_blod.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 5, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                main_editT.setText(ss_blod);
+            }
+
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+            /** 得到光标开始和结束位置 ,超过最大数后记录刚超出的数字索引进行控制 */
+            editStart = main_editT.getSelectionStart();
+            editEnd = main_editT.getSelectionEnd();
+            if (temp.length() > charMaxNum) {
+                Toast.makeText(getApplicationContext(), "您输入的字数已经超过1000", Toast.LENGTH_LONG).show();
+                s.delete(editStart - 1, editEnd);
+                int tempSelection = editStart;
+                main_editT.setText(s);
+                main_editT.setSelection(tempSelection);
+            }
         }
 
     }
@@ -222,5 +299,7 @@ public class HomeTextEdit extends Activity implements View.OnClickListener {
                 height, matrix, true);
         return resizedBitmap;
     }
+
+
 
 }
