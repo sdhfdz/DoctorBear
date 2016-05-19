@@ -8,7 +8,7 @@
     android:layout_marginBottom="6dp"
 
     android:gravity="center_vertical"
-    android:weightSum="10">
+    android:weightSum="12">
 
     <ImageView
         android:layout_width="0dp"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
+        android:layout_weight="10"
         android:textSize="10sp"
         android:text="ceshi"
         />
