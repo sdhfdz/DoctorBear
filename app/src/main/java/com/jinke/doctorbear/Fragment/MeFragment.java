@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.jinke.doctorbear.Activity.LoginActivity;
 import com.jinke.doctorbear.Activity.MyCollectionActivity;
 import com.jinke.doctorbear.Adapter.AdpMeFglv;
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.CircleImageView;
 
 /**
  * 我界面业务逻辑
@@ -23,6 +25,7 @@ public class MeFragment extends Fragment implements View.OnClickListener{
 	private LinearLayout ll_mycollection;
 	private LinearLayout ll_mysubscription;
 	private LinearLayout ll_mymessage;
+	private CircleImageView fg_me_usericon;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +36,7 @@ public class MeFragment extends Fragment implements View.OnClickListener{
 		return view;
 	}
 	public void init(View view){
+		fg_me_usericon = (CircleImageView) view.findViewById(R.id.fg_me_usericon);
 		fg_me_lv = (ListView) view.findViewById(R.id.fg_me_lv);
 		ll_mycollection = (LinearLayout) view.findViewById(R.id.ll_mycollection);
 		ll_mysubscription = (LinearLayout) view.findViewById(R.id.ll_mysubscription);
@@ -40,6 +44,7 @@ public class MeFragment extends Fragment implements View.OnClickListener{
 		ll_mycollection.setOnClickListener(this);
 		ll_mysubscription.setOnClickListener(this);
 		ll_mymessage.setOnClickListener(this);
+		fg_me_usericon.setOnClickListener(this);
 
 		fg_me_lv.setAdapter(new AdpMeFglv(getContext()));
 	}
@@ -56,7 +61,11 @@ public class MeFragment extends Fragment implements View.OnClickListener{
 				System.out.println("我的订阅");
 				break;
 			case R.id.ll_mymessage:
-				System.out.println("我的消息");
+				System.out.println("我的hah");
+				break;
+			case R.id.fg_me_usericon:
+				System.out.println("LOGINLOGIN");
+				startActivity(new Intent(getActivity(), LoginActivity.class));
 				break;
 		}
 	}
