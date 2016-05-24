@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.jinke.doctorbear.Activity.HomeSearchActivity;
 import com.jinke.doctorbear.Activity.HomeTextEdit;
+import com.jinke.doctorbear.Activity.SearchResultLayout;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.NoScrollViewPager;

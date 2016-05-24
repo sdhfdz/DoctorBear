@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jinke.doctorbear.Activity.SearchAllActivity;
+import com.jinke.doctorbear.Activity.SearchResultLayout;
 import com.jinke.doctorbear.R;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
@@ -146,10 +147,15 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
                 /**
                  * 本来应该从服务器获取数据,但是由于尚未与服务器进行连接,所以这里做的操作是隐藏软件盘.
                  */
+				Intent intent_s = new Intent(getActivity(), SearchResultLayout.class);
+				intent_s.putExtra("kind",0);//默认疾病
+				startActivity(intent_s);
                 InputMethodManager inputMethodManager = (InputMethodManager) et_search.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputMethodManager.isActive()) {
                     inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+
                 }
+
 //                search_name.clear();
 //                search_id.clear();
 //                search_price.clear();

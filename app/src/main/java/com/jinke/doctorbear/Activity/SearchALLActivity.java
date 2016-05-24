@@ -25,6 +25,7 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
     private TextView tv_cancel;
     private EditText et_Search;
 
+    public int S_FLAG = 0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
             tv_Search1.setText("骨质疏松");
             tv_Search1.setText("月经不调");
             tv_Search1.setText("乙肝");
-
+            S_FLAG = 0;
 
         }else if (kind.equals("capsule")){
             et_Search.setHint("药品搜索");
@@ -62,6 +63,7 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
             tv_Search1.setText("百服宁");
             tv_Search1.setText("新康泰克");
             tv_Search1.setText("阿司匹林");
+            S_FLAG = 1;//药品
 
         }else if (kind.equals("hospital")){
             et_Search.setHint("医院搜索");
@@ -127,6 +129,9 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                Intent intent_s = new Intent(v.getContext(), SearchResultLayout.class);
+                intent_s.putExtra("kind",S_FLAG);//默认疾病
+                startActivity(intent_s);
                 /*隐藏软键盘*/
                 /**
                  * 本来应该从服务器获取数据,但是由于尚未与服务器进行连接,所以这里做的操作是显示listview.
