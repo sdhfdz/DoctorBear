@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主题色-->
+    <color name="colorMain">#47c6c3</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPressed">#47c6c3</color>
+    <color name="colorNormal">#A2A8B4</color>
+    <!--用于标题栏字色-->
+    <color name="colorGrayFont">#9b9b9b</color>
+    <!--最浅灰色，用于标题栏背景色/-->
+    <color name="colorGrayTitleBG">#f7f7f7</color>
+    <!--从命名不知道颜色用途，请尽量更改或删除-->
+    <color name="colorAccent">#f7f7f7</color>
+    <!--所有分割线的颜色，透明度76-->
+    <color name="colorRuleLine">#4c979797</color>
+    <color name="colorCancle">#000</color>
+
+    <color name="light_gray">#fff5f5f5</color>
+</resources>

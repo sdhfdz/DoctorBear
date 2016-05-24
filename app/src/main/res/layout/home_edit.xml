@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:NiceSpinner="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <RelativeLayout android:id="@+id/home_edit_titleBar_rLayout"
+        android:layout_height="56dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorGrayTitleBG"
+        >
+
+        <TextView android:id="@+id/home_edit_cancel_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:text="取消"
+            android:textSize="12sp"
+            android:textColor="@color/colorMain" />
+
+        <TextView android:id="@+id/home_edit_titleBar_count_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="0字"
+            android:textColor="@color/colorGrayFont"
+            android:textSize="12sp"
+            />
+
+        <TextView android:id="@+id/home_edit_submit_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+
+            android:textColor="@color/colorMain"
+            android:textSize="12sp"
+            android:text="发布" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:background="#FFFFFF"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginEnd="12dp"
+        >
+
+        <!--标题-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <EditText android:id="@+id/home_edit_title_editText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:singleLine="true"
+                android:background="@null"
+                android:hint="提问..."
+                android:text=""
+                android:textSize="12sp"/>
+
+            <com.jinke.doctorbear.Utils.NiceSpinner android:id="@+id/home_edit_spinner"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                NiceSpinner:textTint="@color/colorMain"
+                NiceSpinner:hideArrow="true"
+                android:textSize="12sp"
+              />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorRuleLine"
+            android:layout_marginBottom="8dp"
+            />
+        <!--正文文本框-->
+        <EditText android:id="@+id/home_edit_main_editText"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="输入正文..."
+            android:textSize="12sp"/>
+
+        <!--底部编辑栏-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:weightSum="3"
+            android:background="@color/colorRuleLine"
+            >
+            <ImageView android:id="@+id/home_edit_add_iV"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:src="@mipmap/send_pic"/>
+            <ImageView android:id="@+id/home_edit_set_iV"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+                android:background="#FFFFFF"
+                android:src="@mipmap/send_font"/>
+
+            <ImageView android:id="@+id/home_edit_keybroad_iV"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/send_keybroad"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
