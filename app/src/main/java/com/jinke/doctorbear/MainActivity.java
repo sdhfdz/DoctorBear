@@ -16,6 +16,8 @@ import com.jinke.doctorbear.Fragment.MeFragment;
 import com.jinke.doctorbear.Fragment.SearchFragment;
 import com.jinke.doctorbear.Widget.TabIndicatorView;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by QZ on 2016/5/12.
  * 主页面利用TabHost实现四个Fragment的切换
@@ -46,7 +48,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         initListener();
     }
     private void initView() {
-       edit_imageV =(ImageView)findViewById(R.id.fg_home_iv_edit);
+        ShareSDK.initSDK(this,"12e4d47253398");
+        edit_imageV =(ImageView)findViewById(R.id.fg_home_iv_edit);
 
         //初始化TabHost
         tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
@@ -128,5 +131,12 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
             tabHost.setCurrentTabByTag(TAB_ME);
             IndicatorMe.setTabSelected(true);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShareSDK.stopSDK(this);
+
     }
 }

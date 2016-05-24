@@ -2,4 +2,9 @@
     <string name="app_name">熊大夫</string>
     <string name="activity_fg_home_search_cancle">取消</string>
     <string name="activityfghomesearch"><![CDATA[搜索<问答>相关内容]]></string>
+    <string-array name="welcome_tips">
+        <item >我是熊大夫，很高兴为您服务</item>
+        <item >主人，近来一切可好</item>
+        <item >欢迎回来，我亲爱的主人</item>
+    </string-array>
 </resources>

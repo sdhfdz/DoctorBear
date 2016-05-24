@@ -112,7 +112,10 @@ public class HomeSearchActivity extends Activity implements View.OnClickListener
             case R.id.title_search_et_search:
                 et_search.setCursorVisible(true);
                 break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         }
 
     }

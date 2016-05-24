@@ -6,6 +6,9 @@
     android:background="@mipmap/login_bg"
     tools:context="com.jinke.doctorbear.Activity.LoginActivity">
     <ImageView
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
         android:id="@+id/login_center_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +22,7 @@
         android:layout_above="@id/login_center_text"
         android:src="@mipmap/login_center_wave"/>
     <ImageView
+        android:id="@+id/login_weibo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/login_weibo_type"

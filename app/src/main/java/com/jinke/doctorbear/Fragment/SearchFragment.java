@@ -14,7 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jinke.doctorbear.Activity.SearchAllActivity;
+<<<<<<< HEAD
 import com.jinke.doctorbear.Activity.SearchResultLayout;
+=======
+import com.jinke.doctorbear.Activity.SearchLocationActivity;
+>>>>>>> origin/master
 import com.jinke.doctorbear.R;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
@@ -125,6 +129,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
 				startActivity(intent_hospital);
                 break;
             case R.id.fg_search_iv_location:
+<<<<<<< HEAD
+=======
+				System.out.println("调到百度比图");
+				startActivity(new Intent(getActivity(), SearchLocationActivity.class));
+>>>>>>> origin/master
                 break;
             case R.id.fg_search_iv_putian:
 				Intent intent_putian = new Intent(getActivity(), SearchAllActivity.class);
@@ -147,6 +156,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
                 /**
                  * 本来应该从服务器获取数据,但是由于尚未与服务器进行连接,所以这里做的操作是隐藏软件盘.
                  */
+<<<<<<< HEAD
 				Intent intent_s = new Intent(getActivity(), SearchResultLayout.class);
 				intent_s.putExtra("kind",0);//默认疾病
 				startActivity(intent_s);

@@ -18,13 +18,22 @@
             android:textColor="#030303"
             />
         <com.jinke.doctorbear.Utils.CircleImageView
-            android:id="@+id/fg_me_usericon"
+            android:id="@+id/fg_me_usericon_off"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:visibility="gone"
             android:src="@mipmap/me_login_icon"/>
+        <com.jinke.doctorbear.Utils.CircleImageView
+            android:id="@+id/fg_me_usericon_on"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:visibility="gone" />
 
     </RelativeLayout>
     <LinearLayout
