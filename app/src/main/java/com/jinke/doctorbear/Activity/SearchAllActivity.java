@@ -81,7 +81,7 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
             tv_Search2.setText("武汉百佳医院");
             tv_Search3.setText("上海心脏病医院");
             tv_Search4.setText("青岛妇婴医院");
-            tv_Search5.setText("天津丽人女子医院\n");
+            tv_Search5.setText("天津丽人女子医院");
         }
 
     }
