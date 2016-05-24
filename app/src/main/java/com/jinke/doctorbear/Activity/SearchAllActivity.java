@@ -25,6 +25,7 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
     private TextView tv_cancel;
     private EditText et_Search;
 
+    public int S_FLAG = 0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,38 +49,39 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
             et_Search.setHint("疾病搜索");
             //从服务器获取数据
             tv_Search1.setText("糖尿病");
-            tv_Search1.setText("通风");
-            tv_Search1.setText("骨质疏松");
-            tv_Search1.setText("月经不调");
-            tv_Search1.setText("乙肝");
-
+            tv_Search2.setText("通风");
+            tv_Search3.setText("骨质疏松");
+            tv_Search4.setText("月经不调");
+            tv_Search5.setText("乙肝");
+            S_FLAG = 0;
 
         }else if (kind.equals("capsule")){
             et_Search.setHint("药品搜索");
             //从服务器获取数据
             tv_Search1.setText("布洛芬");
-            tv_Search1.setText("芬必得");
-            tv_Search1.setText("百服宁");
-            tv_Search1.setText("新康泰克");
-            tv_Search1.setText("阿司匹林");
+            tv_Search2.setText("芬必得");
+            tv_Search3.setText("百服宁");
+            tv_Search4.setText("新康泰克");
+            tv_Search5.setText("阿司匹林");
+            S_FLAG = 1;//药品
 
         }else if (kind.equals("hospital")){
             et_Search.setHint("医院搜索");
             //从服务器获取数据
             tv_Search1.setText("北京协和医院");
-            tv_Search1.setText("浙江大学附属第二医院");
-            tv_Search1.setText("江苏省第一人民医院");
-            tv_Search1.setText("南京军区总医院");
-            tv_Search1.setText("江苏省口腔医院");
+            tv_Search2.setText("浙江大学附属第二医院");
+            tv_Search3.setText("江苏省第一人民医院");
+            tv_Search4.setText("南京军区总医院");
+            tv_Search5.setText("江苏省口腔医院");
 
         }else {
             et_Search.setHint("输入地区或者医院名称");
             //从服务器获取数据
             tv_Search1.setText("上海玛丽女子医院");
-            tv_Search1.setText("武汉百佳医院");
-            tv_Search1.setText("上海心脏病医院");
-            tv_Search1.setText("青岛妇婴医院");
-            tv_Search1.setText("天津丽人女子医院\n");
+            tv_Search2.setText("武汉百佳医院");
+            tv_Search3.setText("上海心脏病医院");
+            tv_Search4.setText("青岛妇婴医院");
+            tv_Search5.setText("天津丽人女子医院\n");
         }
 
     }
@@ -127,6 +129,9 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                Intent intent_s = new Intent(v.getContext(), SearchResultLayout.class);
+                intent_s.putExtra("kind",S_FLAG);//默认疾病
+                startActivity(intent_s);
                 /*隐藏软键盘*/
                 /**
                  * 本来应该从服务器获取数据,但是由于尚未与服务器进行连接,所以这里做的操作是显示listview.

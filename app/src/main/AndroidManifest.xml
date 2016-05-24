@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jinke.doctorbear">
-<<<<<<< HEAD
-=======
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
@@ -39,7 +38,6 @@
     <!-- SD卡读取权限，用户写入离线定位数据-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 
->>>>>>> origin/master
 
     <application
         android:allowBackup="true"
@@ -58,12 +56,10 @@
         <activity
             android:name=".Activity.HomeTextEdit"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-<<<<<<< HEAD
         <activity android:name=".Activity.SearchResultLayout"></activity>
         <activity android:name=".Activity.MyCollectionActivity" />
         <activity android:name=".Activity.LoginActivity"></activity>
         <activity android:name=".Activity.SearchAllActivity"></activity>
-=======
         <activity android:name=".Activity.MyCollectionActivity" />
         <activity android:name=".Activity.LoginActivity"></activity>
         <activity android:name=".Activity.SearchAllActivity"></activity>
@@ -84,7 +80,6 @@
             android:enabled="true"
             android:process=":remote"/>
 
->>>>>>> origin/master
     </application>
 
 </manifest>
