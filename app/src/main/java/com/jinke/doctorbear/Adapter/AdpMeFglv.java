@@ -35,7 +35,7 @@ public class AdpMeFglv extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view=null;
         if (convertView==null){
-            view=View.inflate(ctx, R.layout.fg_me_listitem,null);
+            view=View.inflate(ctx, R.layout.fg_me_listitem_off,null);
 
         }else{
             view=convertView;
