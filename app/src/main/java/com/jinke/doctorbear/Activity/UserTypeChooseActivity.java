@@ -69,9 +69,12 @@ public class UserTypeChooseActivity extends AppCompatActivity implements View.On
         public void onSuccess(ResponseInfo responseInfo) {
             System.out.println(responseInfo.result.toString()+"LLLLLLLLLLLLLLLLLLLLLLL");
             String result=null;
+            JSONObject jsonObject=null;
+            String token=null;
             try {
-                JSONObject jsonObject=new JSONObject(responseInfo.result.toString());
+                 jsonObject=new JSONObject(responseInfo.result.toString());
                 result=jsonObject.getString("UserTypeID");
+                token=jsonObject.getString("token");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -80,6 +83,7 @@ public class UserTypeChooseActivity extends AppCompatActivity implements View.On
 
               //  startActivity(new Intent(UserTypeChooseActivity.this,UserTypeChooseActivity.class));
             }else{
+                GlobalAddress.setToken(token,UserTypeChooseActivity.this);
                 startActivity(new Intent(UserTypeChooseActivity.this,MainActivity.class));
             }
         }

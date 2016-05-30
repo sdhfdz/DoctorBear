@@ -148,6 +148,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     public void postUserIfoToServer(HashMap<String, Object> res){
         http = new HttpUtils();
+        http.configCurrentHttpCacheExpiry(1);
         RequestParams params = new RequestParams();
         params.addBodyParameter("UserID",res.get("id").toString());
         params.addBodyParameter("UserTypeID","0");
@@ -160,9 +161,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onSuccess(ResponseInfo responseInfo) {
             String result=null;
+            JSONObject jsonObject=null;
+            String token=null;
+            System.out.println(responseInfo.result.toString()+"shmguishmguishagis");
             try {
-                JSONObject jsonObject=new JSONObject(responseInfo.result.toString());
+                 jsonObject=new JSONObject(responseInfo.result.toString());
                 result=jsonObject.getString("UserTypeID");
+                token=jsonObject.getString("token");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -170,6 +175,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 startActivity(new Intent(LoginActivity.this,UserTypeChooseActivity.class));
             }else{
+                GlobalAddress.setToken(token,LoginActivity.this);
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
             }
         }
