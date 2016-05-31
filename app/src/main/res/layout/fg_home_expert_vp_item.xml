@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp">
     <ImageView
+        android:id="@+id/fg_home_expert_vp_item_iv"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:scaleType="fitXY"

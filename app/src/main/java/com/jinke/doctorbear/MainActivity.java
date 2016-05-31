@@ -14,9 +14,14 @@ import com.jinke.doctorbear.Fragment.DoctorFragment;
 import com.jinke.doctorbear.Fragment.HomeFragment;
 import com.jinke.doctorbear.Fragment.MeFragment;
 import com.jinke.doctorbear.Fragment.SearchFragment;
+import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.jinke.doctorbear.Widget.TabIndicatorView;
 
+import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 
 /**
  * Created by QZ on 2016/5/12.
@@ -46,9 +51,18 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         initView();
         //初始化监听
         initListener();
+     //   String token="P6jBoNrgnMcn/yrgY3h9++W0IBYzjKRtM/pAGwzxsTsVMO0PPSJjnfIz8lhL6EV7wkT5P1slZr/n+n6Q4D1XvgsTwyiJVjZ9";
+        if (GlobalAddress.getToken(MainActivity.this).equals("")){
+            Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+            if (weibo.isAuthValid())
+            weibo.removeAccount(true);
+
+        }else{
+            connect(GlobalAddress.getToken(MainActivity.this));
+            System.out.println(GlobalAddress.getToken(MainActivity.this)+"lalalalallalalallalalaa");
+        }
     }
     private void initView() {
-        ShareSDK.initSDK(this,"12e4d47253398");
         edit_imageV =(ImageView)findViewById(R.id.fg_home_iv_edit);
 
         //初始化TabHost
@@ -90,6 +104,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         // 初始化tab选中
         tabHost.setCurrentTabByTag(TAB_HOME);
         IndicatorHome.setTabSelected(true);
+
     }
     private void initListener() {
 
@@ -138,5 +153,33 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         super.onDestroy();
         ShareSDK.stopSDK(this);
 
+    }
+    public  void connect(String token){
+        RongIM.connect(token,new Myconnect());
+    }
+    class Myconnect extends RongIMClient.ConnectCallback{
+        @Override
+        public void onError(RongIMClient.ErrorCode errorCode) {
+
+            System.out.println("OnError"+"---------------------");
+        }
+
+        @Override
+        public void onSuccess(String s) {
+
+            System.out.println("OnSuccess"+"---------------------");
+        }
+
+        @Override
+        public void onTokenIncorrect() {
+
+            System.out.println("onTokenIncorrect"+"---------------------");
+        }
+
+        @Override
+        public void onFail(RongIMClient.ErrorCode errorCode) {
+            super.onFail(errorCode);
+            System.out.println("onFail"+"---------------------");
+        }
     }
 }

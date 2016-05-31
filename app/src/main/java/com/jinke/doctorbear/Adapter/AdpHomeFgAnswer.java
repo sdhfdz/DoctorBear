@@ -24,7 +24,7 @@ import java.util.List;
 
 public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
     boolean data;
-    public AdpHomeFgAnswer(Context context, ArrayList<FgHomeAnswerModel> listAnswer) {
+    public AdpHomeFgAnswer(Context context, List<FgHomeAnswerModel> listAnswer) {
         super(context,listAnswer);
     }
 
@@ -36,7 +36,7 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
 
     @Override
     public int getCount() {
-        return 5;
+        return list.size();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
      * @param position
      */
     private void initData(ViewHolder holder,  int position) {
-        if(data) {
+
             FgHomeAnswerModel fgHomeAnswerModel = list.get(position);
             if (fgHomeAnswerModel == null) {
                 return;
@@ -87,8 +87,9 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
             holder.answerTitle.setText(fgHomeAnswerModel.getAnswerTitle());
             holder.illness.setText(fgHomeAnswerModel.getIllness());
             holder.answerContent.setText(fgHomeAnswerModel.getAnswerContent());
+            holder.time.setText(fgHomeAnswerModel.getTime());
             Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
-        }
+
     }
 
     /**
