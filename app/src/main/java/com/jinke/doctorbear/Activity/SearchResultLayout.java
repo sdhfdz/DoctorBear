@@ -70,13 +70,6 @@ public class SearchResultLayout  extends Activity{
         scienceTextView = new TextView(this);
         questionTextView = new TextView(this);
 
-        graybackgroud_tv0 = new TextView(this);
-        graybackgroud_tv0 = new TextView(this);
-        graybackgroud_tv0 = new TextView(this);
-        graybackgroud_tv0.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        graybackgroud_tv1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        graybackgroud_tv2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-
         setTextView(deseaseTextView,"相关疾病");
         setTextView(medicineTextView,"相关药品");
         setTextView(questionTextView,"相关问答");
@@ -102,6 +95,7 @@ public class SearchResultLayout  extends Activity{
                 new String[] { "info","tag"},
                 new int[] { R.id.search_result_q_item_tv,R.id.search_result_q_item_tag_tv}));
 
+        setgrayBack();
         setLayoutSort();
     }
 
@@ -152,11 +146,27 @@ public class SearchResultLayout  extends Activity{
     private void setTextView(TextView textView,String context ) {
         textView.setText(context);
         textView.setTextSize(16);
-        textView.setHeight(56);
+        textView.setHeight(100);
         textView.setGravity(Gravity.CENTER_VERTICAL);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(dip2px(this,(float)12.00),0,0,0);//4个参数按顺序分别是左上右下
         textView.setLayoutParams(layoutParams);
+    }
+    private void setgrayBack()
+    {
+        graybackgroud_tv0 = new TextView(this);
+        graybackgroud_tv1 = new TextView(this);
+        graybackgroud_tv2 = new TextView(this);
+
+        graybackgroud_tv0.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        graybackgroud_tv1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        graybackgroud_tv2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        graybackgroud_tv0.setLayoutParams(layoutParams);
+        graybackgroud_tv1.setLayoutParams(layoutParams);
+        graybackgroud_tv2.setLayoutParams(layoutParams);
+
     }
 
     private List<Map<String, Object>> getDeseaseData() {
