@@ -11,13 +11,22 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jinke.doctorbear.Adapter.AdpHomeFgAnswer;
 import com.jinke.doctorbear.Adapter.AdpHomeFgExpert;
 import com.jinke.doctorbear.Model.FgHomeAnswerModel;
 import com.jinke.doctorbear.Model.FgHomeExpertModel;
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.GetDataServer;
+import com.jinke.doctorbear.Utils.GlobalAddress;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,14 +35,20 @@ import java.util.List;
  * Created by Max on 2016/5/17.
  */
 public class HomeSearchActivity extends Activity implements View.OnClickListener{
+    private static String TAG = HomeSearchActivity.class.getSimpleName();
     private TextView tv_cancel;
     private EditText et_search;
     private ListView lv_search;
-    List <FgHomeExpertModel> listExpert;
-    List <FgHomeAnswerModel> listAnswer;
+
+    GetDataServer getDataServer = new GetDataServer();
+
+    ArrayList <FgHomeExpertModel> listExpert = new ArrayList<FgHomeExpertModel>() ;
+    ArrayList <FgHomeAnswerModel> listAnswer = new ArrayList<FgHomeAnswerModel>();
+    AdpHomeFgAnswer adpHomeFgAnswer;
+    AdpHomeFgExpert adpHomeFgExpert;
     SharedPreferences sp;
     private String name;
-
+    private boolean page;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +69,16 @@ public class HomeSearchActivity extends Activity implements View.OnClickListener
     private void initData() {
 
         sp = getSharedPreferences("info", Context.MODE_PRIVATE);
-        boolean page = sp.getBoolean("page",true);
+        page = sp.getBoolean("page",true);
         if (page){
             et_search.setHint("搜索<问答>相关内容");
-            lv_search.setAdapter(new AdpHomeFgAnswer(this,listAnswer,false));
+            adpHomeFgAnswer = new AdpHomeFgAnswer(this,listAnswer);
+
             lv_search.setVisibility(View.INVISIBLE);
 
         }else {
             et_search.setHint("搜索<科普>相关内容");
-            lv_search.setAdapter(new AdpHomeFgExpert(this,listExpert,false));
+            adpHomeFgExpert = new AdpHomeFgExpert(this ,listExpert);
             lv_search.setVisibility(View.INVISIBLE);
 
         }
@@ -126,32 +142,32 @@ public class HomeSearchActivity extends Activity implements View.OnClickListener
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                 /*隐藏软键盘*/
-                /**
-                 * 本来应该从服务器获取数据,但是由于尚未与服务器进行连接,所以这里做的操作是显示listview.
-                 */
                 lv_search.setVisibility(View.VISIBLE);
                 InputMethodManager inputMethodManager = (InputMethodManager) et_search.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputMethodManager.isActive()) {
                     inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
                 }
-//                search_name.clear();
-//                search_id.clear();
-//                search_price.clear();
-//                search_picUrl.clear();
-//                search_number.clear();
-                //pb_progress.setVisibility(View.VISIBLE);
-//                name = et_search.getText().toString();
-//                System.out.println("DATADATA:"+name);
-//                search_detail_url = DownloadUrl.search_url + name;
-//                if (search_detail_url!=null){
-//                    getDataFromServer();
-//                }
 
+                name = et_search.getText().toString();
+                System.out.println("DATADATA:"+name);
+                if (page) {
+                    String search_detail_url = GlobalAddress.SERVER + "/doctuser/search.php?"+"content=" + name + "&tag=0";
+                    if (search_detail_url != null) {
+                        getDataServer.getAnswerFromServer(getApplication(),search_detail_url,listAnswer,lv_search,adpHomeFgAnswer);
+                    }
+                }else {
+                    String search_detail_url = GlobalAddress.SERVER + "/doctuser/search.php?"+"content=" + name + "&tag=1";
+                    if (search_detail_url != null) {
+                        getDataServer.getExpertFromServer(getApplication(),search_detail_url,listExpert,lv_search,adpHomeFgExpert);
+                    }
 
+                }
                 return true;
             }
             return false;
         }
     };
+
+
 
 }

@@ -59,7 +59,6 @@ public class AdpHomeFgExpert extends AdpBase<FgHomeExpertModel> {
      * @param position
      */
     private void initData(ViewHolder holder,  int position) {
-        if (data) {
             FgHomeExpertModel fgHomeExpertModel = list.get(position);
             if (fgHomeExpertModel == null) {
                 return;
@@ -72,7 +71,7 @@ public class AdpHomeFgExpert extends AdpBase<FgHomeExpertModel> {
             Picasso.with(context).load(fgHomeExpertModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
             Picasso.with(context).load(fgHomeExpertModel.getIv_headImage()).error(R.mipmap.logo).into(holder.expertPicture);
 
-        }
+
     }
     /**
      * 初始化所有控件
