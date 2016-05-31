@@ -2,17 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_margin="12dp"
+        android:layout_marginLeft="12dp"
         android:gravity="center_vertical">
 
         <ImageView android:id="@+id/search_result_m_item_icon"
-            android:layout_width="12dp"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             android:src="@mipmap/search_result_pill_icon"
@@ -23,17 +26,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/search_result_m_item_icon"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="12dp"
             android:layout_centerVertical="true"
-            android:textSize="12sp"
-            android:text="sss"
+            android:textColor="#000000"
+            android:textSize="14sp"
             />
+
         <ImageView android:id="@+id/search_result_m_item_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             android:src="@mipmap/artical_author_arrow"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="12dp"/>
     </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

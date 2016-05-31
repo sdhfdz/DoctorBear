@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--listview的特殊分割线，应用于搜索结果页面（search_reult.xml）的前两个listview中-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="48dp"
+    android:drawable="@color/colorGrayFont">
+</inset>
