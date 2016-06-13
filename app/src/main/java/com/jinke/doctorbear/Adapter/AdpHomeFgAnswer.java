@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import java.util.List;
 
 public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
     boolean data;
+    public String communityID;
     public AdpHomeFgAnswer(Context context, List<FgHomeAnswerModel> listAnswer) {
         super(context,listAnswer);
     }
@@ -89,6 +91,11 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
             holder.answerContent.setText(fgHomeAnswerModel.getAnswerContent());
             holder.time.setText(fgHomeAnswerModel.getTime());
             Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
+            if (fgHomeAnswerModel.getPicture()==null){
+                holder.picture.setVisibility(View.GONE);
+            }else {
+                Picasso.with(context).load(fgHomeAnswerModel.getPicture()).into(holder.picture);
+            }
 
     }
 
@@ -107,6 +114,8 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
         holder.time = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_time);
         holder.illness = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_illness);
         holder.comment = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_comment);
+        holder.picture = (ImageView) convertView.findViewById(R.id.fg_home_answer_lv_iv_picture);
+        holder.linearLayout = (LinearLayout) convertView.findViewById(R.id.fg_home_answer_lv_layout_main);
     }
 
     public class ViewHolder{
@@ -117,5 +126,7 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
         TextView answerContent;
         TextView illness;
         TextView comment;
+        ImageView picture;
+        LinearLayout linearLayout;
     }
 }

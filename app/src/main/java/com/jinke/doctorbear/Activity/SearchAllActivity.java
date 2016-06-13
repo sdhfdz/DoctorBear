@@ -11,12 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.GlobalAddress;
 
 /**
  * 搜索页面,疾病,药品,医院,莆田集成
  * Created by Max on 2016/5/19.
  */
 public class SearchAllActivity extends Activity implements View.OnClickListener{
+    String name;
+
     private TextView tv_Search1;
     private TextView tv_Search2;
     private TextView tv_Search3;
@@ -129,9 +132,7 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
-                Intent intent_s = new Intent(v.getContext(), SearchResultLayout.class);
-                intent_s.putExtra("kind",S_FLAG);//默认疾病
-                startActivity(intent_s);
+
                 /*隐藏软键盘*/
                 /**
                  * 本来应该从服务器获取数据,但是由于尚未与服务器进行连接,所以这里做的操作是显示listview.
@@ -140,20 +141,13 @@ public class SearchAllActivity extends Activity implements View.OnClickListener{
                 if (inputMethodManager.isActive()) {
                     inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
                 }
-//                search_name.clear();
-//                search_id.clear();
-//                search_price.clear();
-//                search_picUrl.clear();
-//                search_number.clear();
-                //pb_progress.setVisibility(View.VISIBLE);
-//                name = et_search.getText().toString();
-//                System.out.println("DATADATA:"+name);
-//                search_detail_url = DownloadUrl.search_url + name;
-//                if (search_detail_url!=null){
-//                    getDataFromServer();
-//                }
 
-
+                String name = et_Search.getText().toString();
+                System.out.println("DATADATA:"+name);
+                Intent intent_s = new Intent(SearchAllActivity.this, SearchResultLayout.class);
+                intent_s.putExtra("kind",S_FLAG);//默认疾病
+                intent_s.putExtra("name",name);
+                startActivity(intent_s);
                 return true;
             }
             return false;

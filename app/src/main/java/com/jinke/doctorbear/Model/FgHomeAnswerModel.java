@@ -5,15 +5,19 @@ package com.jinke.doctorbear.Model;
  * Created by Max on 2016/5/17.
  */
 public class FgHomeAnswerModel {
-    String  iv_headImage;
+    String iv_headImage;
     String nickName;
     String time;
     String answerTitle;
     String answerContent;
     String illness;
     String comment;
+    String picture;
+    String communityID;
 
-    public FgHomeAnswerModel(String iv_headImage, String nickName, String answerTitle, String time, String answerContent, String illness, String comment) {
+
+    public FgHomeAnswerModel(String iv_headImage, String nickName, String answerTitle, String time, String answerContent,
+                             String illness, String comment, String picture, String communityID) {
         this.iv_headImage = iv_headImage;
         this.nickName = nickName;
         this.answerTitle = answerTitle;
@@ -21,6 +25,24 @@ public class FgHomeAnswerModel {
         this.answerContent = answerContent;
         this.illness = illness;
         this.comment = comment;
+        this.picture = picture;
+        this.communityID = communityID;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getCommunityID() {
+        return communityID;
+    }
+
+    public void setCommunityID(String communityID) {
+        this.communityID = communityID;
     }
 
     public String getIv_headImage() {

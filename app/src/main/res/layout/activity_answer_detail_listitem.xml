@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+        <com.jinke.doctorbear.Utils.CircleImageView
+            android:id="@+id/activity_answer_detail_listitem_iv_head"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/head"/>
+        <TextView
+            android:id="@+id/activity_answer_detail_listitem_tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小小飞行家"
+            android:textSize="15sp"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/colorMain"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/activity_answer_detail_listitem_iv_head" />
+        <TextView
+            android:id="@+id/activity_answer_detail_listitem_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#9B9B9B"
+            android:textSize="8sp"
+            android:layout_marginTop="2dp"
+            android:text="2分钟前"
+            android:layout_below="@+id/activity_answer_detail_listitem_tv_nickname"
+            android:layout_alignStart="@+id/activity_answer_detail_listitem_tv_nickname" />
+
+        <TextView
+            android:id="@+id/activity_answer_detail_listitem_tv_answerContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="患者性别：女  患者年龄：70  简要病史：发现血糖升高10余年，反复双下肢中度凹陷水肿半年，辅助检查：腹部CT"
+            android:textColor="#9B9B9B"
+            android:textSize="10sp"
+            android:layout_below="@+id/activity_answer_detail_listitem_tv_time"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@+id/activity_answer_detail_listitem_tv_time"
+            android:layout_marginEnd="14dp"
+            />
+
+
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorRuleLine"
+        android:layout_marginTop="15dp"
+        />
+</LinearLayout>
