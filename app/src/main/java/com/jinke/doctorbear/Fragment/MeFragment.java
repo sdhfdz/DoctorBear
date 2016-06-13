@@ -15,6 +15,7 @@ import com.jinke.doctorbear.Activity.MyCollectionActivity;
 import com.jinke.doctorbear.Adapter.AdpMeFglv;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.CircleImageView;
+import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.lidroid.xutils.BitmapUtils;
 
 import cn.sharesdk.framework.Platform;
@@ -49,11 +50,11 @@ public class MeFragment extends Fragment implements View.OnClickListener{
 		fg_me_usericon_off = (CircleImageView) view.findViewById(R.id.fg_me_usericon_off);
 		fg_me_usericon_on = (CircleImageView) view.findViewById(R.id.fg_me_usericon_on);
 		weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
-		if (weibo.isAuthValid()){
+		if (!GlobalAddress.getUserId(getActivity()).equals("")){
 			bitmapUtils = new BitmapUtils(getActivity());
 			fg_me_usericon_off.setVisibility(View.GONE);
 			fg_me_usericon_on.setVisibility(View.VISIBLE);
-			bitmapUtils.display(fg_me_usericon_on,weibo.getDb().getUserIcon());
+			bitmapUtils.display(fg_me_usericon_on, GlobalAddress.getUserIcon(getActivity()));
 		}else{
 			fg_me_usericon_off.setVisibility(View.VISIBLE);
 			fg_me_usericon_on.setVisibility(View.GONE);

@@ -7,12 +7,16 @@ import android.content.SharedPreferences;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+
 /**
  * Created by sdh on 2016/5/23.
  */
 public class GlobalAddress {
     private Context ctx;
-
+    private static Platform weibo=  ShareSDK.getPlatform(SinaWeibo.NAME);
     public static final String SERVER="http://192.168.1.100";
     public static final  String App_key="vnroth0krx3io";
     public static String sha1(String data)  {
@@ -41,5 +45,31 @@ public class GlobalAddress {
         SharedPreferences sp=ctx.getSharedPreferences("tokenfile",Context.MODE_PRIVATE);
         return  sp.getString("token","");
     }
+    public static String getUserId(Context ctx){
+        if (weibo.getDb().getUserId()!=null && !weibo.getDb().getUserId().equals("")){
+            return weibo.getDb().getUserId();
+        }else{
+            SharedPreferences sp=ctx.getSharedPreferences("user_info",Context.MODE_PRIVATE);
+            return  sp.getString("id","");
+        }
+    }
+    public static String getUserIcon(Context ctx){
+        if (weibo.getDb().getUserIcon()!=null && !weibo.getDb().getUserIcon().equals("")){
+            return weibo.getDb().getUserIcon();
+        }else{
+            SharedPreferences sp=ctx.getSharedPreferences("user_info",Context.MODE_PRIVATE);
+            return  sp.getString("profile_image_url","");
+        }
+    }
+    public static String getUserName(Context ctx){
+        if (weibo.getDb().getUserName()!=null && !weibo.getDb().getUserName().equals("")){
+            return weibo.getDb().getUserName();
+        }else{
+            SharedPreferences sp=ctx.getSharedPreferences("user_info",Context.MODE_PRIVATE);
+            return  sp.getString("name","");
+        }
+    }
+
+
 
 }

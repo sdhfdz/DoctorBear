@@ -1,10 +1,15 @@
 package com.jinke.doctorbear;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -17,11 +22,16 @@ import com.jinke.doctorbear.Fragment.SearchFragment;
 import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.jinke.doctorbear.Widget.TabIndicatorView;
 
+import org.json.JSONObject;
+
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
+import io.rong.imlib.model.UserInfo;
 
 /**
  * Created by QZ on 2016/5/12.
@@ -41,16 +51,21 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     private ImageView edit_imageV ;
     private FragmentTabHost tabHost;
     SharedPreferences sp;
+    private NotificationManager mNotificationManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         sp = getSharedPreferences("info",MODE_PRIVATE);
         sp.edit().putBoolean("page",true).commit();
         //初始化布局
         initView();
         //初始化监听
         initListener();
+        RongIM.setOnReceiveMessageListener(new MyReceiveMessageListener());
+
      //   String token="P6jBoNrgnMcn/yrgY3h9++W0IBYzjKRtM/pAGwzxsTsVMO0PPSJjnfIz8lhL6EV7wkT5P1slZr/n+n6Q4D1XvgsTwyiJVjZ9";
         if (GlobalAddress.getToken(MainActivity.this).equals("")){
             Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
@@ -180,6 +195,59 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         public void onFail(RongIMClient.ErrorCode errorCode) {
             super.onFail(errorCode);
             System.out.println("onFail"+"---------------------");
+        }
+    }
+    private class MyReceiveMessageListener implements RongIMClient.OnReceiveMessageListener {
+
+        /**
+         * 收到消息的处理。
+         *
+         * @param message 收到的消息实体。
+         * @param left    剩余未拉取消息数目。
+         * @return 收到消息是否处理完成，true 表示走自已的处理方式，false 走融云默认处理方式。
+         */
+        @Override
+        public boolean onReceived(Message message, int left) {
+            //开发者根据自己需求自行处理
+            System.out.println(message.getSenderUserId()+message.getContent()+"nihaonihao");
+//            if (GlobalAddress.getUserId(MainActivity.this).equals("3963183378")){
+//                RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(MainActivity.this),
+//                        GlobalAddress.getUserName(MainActivity.this), Uri.parse(GlobalAddress.getUserIcon(MainActivity.this))));
+//                System.out.println(GlobalAddress.getUserId(MainActivity.this)+"测试一下id");
+//                if (RongIM.getInstance() != null ) {
+//                    RongIM.getInstance().startPrivateChat(MainActivity.this,message.getSenderUserId(),null);
+//                }
+//
+//            }
+
+            RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(MainActivity.this),
+                        GlobalAddress.getUserName(MainActivity.this), Uri.parse(GlobalAddress.getUserIcon(MainActivity.this))));
+
+            Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon().appendPath("conversation").appendPath(Conversation.ConversationType.PRIVATE.getName().toLowerCase()).appendQueryParameter("targetId",
+                    message.getSenderUserId()).appendQueryParameter("title", "用户").build();
+            Intent it=new Intent("android.intent.action.VIEW", uri);
+            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, it, 0);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this);
+            mBuilder.setSmallIcon(R.drawable.bear_icon);
+            mBuilder.setContentTitle("熊大夫");//设置通知栏标题
+            mBuilder.setContentText("您收到了消息！");
+       //     UserInfo userInfo=message.getContent().getUserInfo();
+//            if (userInfo==null){
+//                System.out.println("userinfo is null");
+//            }
+          //  System.out.println(message.getContent().getUserInfo().toString());
+            mBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
+            mBuilder.setContentIntent(pendingIntent);
+            mBuilder.setAutoCancel(true);
+            mBuilder.setWhen(System.currentTimeMillis());
+            mBuilder.setTicker(message.getExtra());
+          //  mBuilder.setNumber(3);
+            Notification notification = mBuilder.build();
+            //notification.flags = Notification.FLAG_AUTO_CANCEL;
+            mNotificationManager.notify(1, notification);
+            System.out.println(message.toString()+":"+left+"asdfaoids");
+
+            return true;
         }
     }
 }
