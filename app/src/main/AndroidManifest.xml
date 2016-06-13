@@ -85,7 +85,8 @@
             android:name="RONG_CLOUD_APP_KEY"
             android:value="vnroth0krx3io" />
 
-        <activity android:name=".Activity.ConversationActivity">
+        <activity android:name=".Activity.ConversationActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -156,6 +157,16 @@
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
+        <receiver
+            android:exported="true"
+            android:name=".Receiver.NotificationReceiver">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

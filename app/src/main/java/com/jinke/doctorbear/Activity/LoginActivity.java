@@ -1,6 +1,7 @@
 package com.jinke.doctorbear.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.SynchronousQueue;
 
 import cn.sharesdk.framework.Platform;
@@ -35,11 +38,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView login_weibo;
     private Handler handler;
     private HttpUtils http;
+    private Platform weibo;
+    SharedPreferences sp=null;
+    private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sp=getSharedPreferences("user_info",MODE_PRIVATE);
+        editor = sp.edit();
         handler = new Handler(this);
         login_weibo = (ImageView) findViewById(R.id.login_weibo);
         login_weibo.setOnClickListener(this);
@@ -53,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         System.out.println("你好年后年后");
       //  ShareSDK.initSDK(this,"12e4d47253398");
-        Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+        weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
         weibo.setPlatformActionListener(new SinaWeiboListener());
         weibo.SSOSetting(true);
         //weibo.authorize();
@@ -87,15 +96,53 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         "描述："+description+";"+
                         "用户头像地址："+profile_image_url;
                 System.out.println("用户资料: "+str);
+
+                editor.putString("id",id);
+                editor.putString("name",name);
+                editor.putString("description",description);
+                editor.putString("profile_image_url",profile_image_url);
+                editor.commit();
                 postUserIfoToServer(res);
                 break;
             case 2: {
                 //取消授权
                 Toast.makeText(this, "授权取消", Toast.LENGTH_SHORT).show();
+
             } break;
             case 3: {
                 //授权失败
                 Toast.makeText(this,"授权失败", Toast.LENGTH_SHORT).show();
+                if (weibo.isAuthValid())
+                    weibo.removeAccount(true);
+                HashMap<String ,Object> self_defined_user=null;
+               // SharedPreferences sp=getSharedPreferences("user_info",MODE_PRIVATE);
+                if (sp.getString("id","").equals("")){
+                    long userid=((int)(Math.random()*100)+1)*10000+1234;
+                    String user_name="你不知道的事儿";
+                    self_defined_user=new HashMap<String ,Object>();
+                    self_defined_user.put("id",userid+"");
+                    self_defined_user.put("name",user_name+"");
+                    self_defined_user.put("description","没法描述");
+                    self_defined_user.put("profile_image_url","http://tva3.sinaimg.cn/crop.0.0.996.996.50/ec396112jw8f2nfk4jq79j20ro0rpgou.jpg");
+                    // startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
+                   // SharedPreferences.Editor editor=sp.edit();
+                    editor.putString("id",userid+"");
+                    editor.putString("name",user_name);
+                    editor.putString("description","没法描述");
+                    editor.putString("profile_image_url",self_defined_user.get("profile_image_url").toString());
+                    editor.commit();
+                    System.out.println(userid+"nihaoaaodf");
+                }else{
+                    String user_name="你不知道的事儿";
+                    self_defined_user=new HashMap<String ,Object>();
+                    self_defined_user.put("id",sp.getString("id",""));
+                    self_defined_user.put("name",user_name+"");
+                    self_defined_user.put("description","没法描述");
+                    self_defined_user.put("profile_image_url","http://tva3.sinaimg.cn/crop.0.0.996.996.50/ec396112jw8f2nfk4jq79j20ro0rpgou.jpg");
+                    // startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                }
+                postUserIfoToServer(self_defined_user);
             } break;
         }
         return false;
@@ -148,6 +195,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     public void postUserIfoToServer(HashMap<String, Object> res){
         http = new HttpUtils();
+        System.out.println("MKMKMKNVDSKJFNAOFJ");
         http.configCurrentHttpCacheExpiry(1);
         RequestParams params = new RequestParams();
         params.addBodyParameter("UserID",res.get("id").toString());
@@ -168,6 +216,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                  jsonObject=new JSONObject(responseInfo.result.toString());
                 result=jsonObject.getString("UserTypeID");
                 token=jsonObject.getString("token");
+                GlobalAddress.setToken(token,LoginActivity.this);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

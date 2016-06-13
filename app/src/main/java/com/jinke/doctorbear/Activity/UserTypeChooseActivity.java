@@ -3,6 +3,7 @@ package com.jinke.doctorbear.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -60,14 +61,18 @@ public class UserTypeChooseActivity extends AppCompatActivity implements View.On
         weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
         http = new HttpUtils();
         RequestParams params = new RequestParams();
-        params.addBodyParameter("UserID",weibo.getDb().getUserId());
+        params.addBodyParameter("UserID",GlobalAddress.getUserId(UserTypeChooseActivity.this));
+        params.addBodyParameter("UserName",GlobalAddress.getUserName(UserTypeChooseActivity.this));
         params.addBodyParameter("UserTypeID",UserType);
         http.send(HttpRequest.HttpMethod.POST, GlobalAddress.SERVER+"/doctuser/setusertype.php",params,new MyrequestCallBack());
     }
     class MyrequestCallBack extends RequestCallBack{
         @Override
         public void onSuccess(ResponseInfo responseInfo) {
-            System.out.println(responseInfo.result.toString()+"LLLLLLLLLLLLLLLLLLLLLLL");
+            System.out.println(responseInfo.result.toString()+"asdfasegaefgvasdfawe");
+            System.out.println(GlobalAddress.getUserId(UserTypeChooseActivity.this)+":"+GlobalAddress.getUserName(UserTypeChooseActivity.this)+"MNMNMNJFS");
+            Log.i("haha",GlobalAddress.getUserId(UserTypeChooseActivity.this)+":"+GlobalAddress.getUserName(UserTypeChooseActivity.this)+"MNMNMNJFS");
+
             String result=null;
             JSONObject jsonObject=null;
             String token=null;
@@ -75,6 +80,7 @@ public class UserTypeChooseActivity extends AppCompatActivity implements View.On
                  jsonObject=new JSONObject(responseInfo.result.toString());
                 result=jsonObject.getString("UserTypeID");
                 token=jsonObject.getString("token");
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -84,6 +90,7 @@ public class UserTypeChooseActivity extends AppCompatActivity implements View.On
               //  startActivity(new Intent(UserTypeChooseActivity.this,UserTypeChooseActivity.class));
             }else{
                 GlobalAddress.setToken(token,UserTypeChooseActivity.this);
+
                 startActivity(new Intent(UserTypeChooseActivity.this,MainActivity.class));
             }
         }
@@ -91,7 +98,7 @@ public class UserTypeChooseActivity extends AppCompatActivity implements View.On
         @Override
         public void onFailure(HttpException e, String s) {
 
-            System.out.println(s+"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+            System.out.println(s+"asdfasegaefgvasdfawe");
 
         }
     }

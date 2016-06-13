@@ -58,7 +58,7 @@ public class DoctorFragment extends Fragment {
             public void onClick(View v) {
                 System.out.print("点击专业医师");
                 weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
-                if (!weibo.isAuthValid()) {
+                if ((GlobalAddress.getUserId(getActivity()).equals(""))) {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 } else {
 //					System.out.println(weibo.getDb().getUserIcon()+
@@ -77,11 +77,13 @@ public class DoctorFragment extends Fragment {
 //					params.addBodyParameter("portraitUri",weibo.getDb().getUserIcon());
 //					http.send(HttpRequest.HttpMethod.POST,"https://api.cn.ronghub.com/user/getToken.json",params,new MyrequestCallBack());
 
-                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(weibo.getDb().getUserId(),
-                    weibo.getDb().getUserName(), Uri.parse(weibo.getDb().getUserIcon())));
-                    if (RongIM.getInstance() != null) {
-                        RongIM.getInstance().startPrivateChat(getActivity(), weibo.getDb().getUserId(),weibo.getDb().getUserName());
-                        System.out.println(weibo.getDb().getUserName()+">>>>>>>>>>>>>>>>>>");
+                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(getActivity()),
+                    GlobalAddress.getUserName(getActivity()), Uri.parse(GlobalAddress.getUserIcon(getActivity()))));
+                    System.out.println(GlobalAddress.getUserId(getActivity())+"测试一下idsdfgsdfgs");
+                    System.out.println(GlobalAddress.getToken(getActivity())+"测试tokensf");
+                    if (RongIM.getInstance() != null && !(GlobalAddress.getUserId(getActivity()).equals("3963183378"))) {
+                        RongIM.getInstance().startPrivateChat(getActivity(),"3963183378","haha");
+                        System.out.println(GlobalAddress.getUserName(getActivity())+">>>>>>>>>>>>>>>>>>");
                     }
 
 

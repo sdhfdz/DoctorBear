@@ -23,4 +23,11 @@ public class ConversationActivity extends AppCompatActivity {
         BarTitle.setText(title);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.out.println("lalllallal");
+        finish();
+    }
 }
