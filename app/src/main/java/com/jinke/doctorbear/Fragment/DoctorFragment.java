@@ -77,12 +77,12 @@ public class DoctorFragment extends Fragment {
 //					params.addBodyParameter("portraitUri",weibo.getDb().getUserIcon());
 //					http.send(HttpRequest.HttpMethod.POST,"https://api.cn.ronghub.com/user/getToken.json",params,new MyrequestCallBack());
 
-                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(getActivity()),
-                    GlobalAddress.getUserName(getActivity()), Uri.parse(GlobalAddress.getUserIcon(getActivity()))));
-                    System.out.println(GlobalAddress.getUserId(getActivity())+"测试一下idsdfgsdfgs");
-                    System.out.println(GlobalAddress.getToken(getActivity())+"测试tokensf");
+//                    RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(getActivity()),
+//                    GlobalAddress.getUserName(getActivity()), Uri.parse(GlobalAddress.getUserIcon(getActivity()))));
+//                    System.out.println(GlobalAddress.getUserId(getActivity())+"测试一下idsdfgsdfgs");
+//                    System.out.println(GlobalAddress.getToken(getActivity())+"测试tokensf");
                     if (RongIM.getInstance() != null && !(GlobalAddress.getUserId(getActivity()).equals("3963183378"))) {
-                        RongIM.getInstance().startPrivateChat(getActivity(),"3963183378","haha");
+                        RongIM.getInstance().startPrivateChat(getActivity(),"3963183378",null);
                         System.out.println(GlobalAddress.getUserName(getActivity())+">>>>>>>>>>>>>>>>>>");
                     }
 
