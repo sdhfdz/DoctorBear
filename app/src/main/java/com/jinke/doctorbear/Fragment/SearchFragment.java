@@ -17,6 +17,8 @@ import com.jinke.doctorbear.Activity.SearchAllActivity;
 import com.jinke.doctorbear.Activity.SearchResultLayout;
 import com.jinke.doctorbear.Activity.SearchLocationActivity;
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.GetDataServer;
+import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
@@ -24,6 +26,8 @@ import com.xys.libzxing.zxing.activity.CaptureActivity;
  */
 
 public class SearchFragment extends Fragment implements View.OnClickListener{
+
+	Context context;
 
 	private EditText et_search;
 	private ImageView iv_scan;
@@ -39,11 +43,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
 	private TextView tv_hot4;
 	private TextView tv_hot5;
 
+	GetDataServer getDataServer = new GetDataServer();
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fg_search, container, false);
+		context = view.getContext();
 		init(view);
 		return view;
 	}
@@ -151,28 +158,19 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
                 /**
                  * 本来应该从服务器获取数据,但是由于尚未与服务器进行连接,所以这里做的操作是隐藏软件盘.
                  */
-				Intent intent_s = new Intent(getActivity(), SearchResultLayout.class);
-				intent_s.putExtra("kind",0);//默认疾病
-				startActivity(intent_s);
+
                 InputMethodManager inputMethodManager = (InputMethodManager) et_search.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputMethodManager.isActive()) {
                     inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
 
                 }
 
-//                search_name.clear();
-//                search_id.clear();
-//                search_price.clear();
-//                search_picUrl.clear();
-//                search_number.clear();
-                //pb_progress.setVisibility(View.VISIBLE);
-//                name = et_search.getText().toString();
-//                System.out.println("DATADATA:"+name);
-//                search_detail_url = DownloadUrl.search_url + name;
-//                if (search_detail_url!=null){
-//                    getDataFromServer();
-//                }
-
+				String name = et_search.getText().toString();
+				System.out.println("DATADATA:"+name);
+				Intent intent_s = new Intent(getActivity(), SearchResultLayout.class);
+				intent_s.putExtra("kind",0);//默认疾病
+				intent_s.putExtra("name",name);
+				startActivity(intent_s);
 
                 return true;
             }

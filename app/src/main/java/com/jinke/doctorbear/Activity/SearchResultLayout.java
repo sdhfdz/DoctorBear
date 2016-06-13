@@ -11,12 +11,15 @@ import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.GetDataServer;
+import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.jinke.doctorbear.Utils.ScrollListView;
 
 import java.util.ArrayList;
@@ -32,6 +35,10 @@ import android.widget.TextView;
  */
 public class SearchResultLayout  extends Activity{
 
+    GetDataServer getDataServer = new GetDataServer();
+    int kind;
+
+    private EditText et_Search;
 
     private LinearLayout mainLayout;
     private ScrollListView deseaseListView ;
@@ -60,6 +67,8 @@ public class SearchResultLayout  extends Activity{
     private void initView(){
         mainLayout = (LinearLayout) this.findViewById(R.id.search_result_layout);
 
+        et_Search = (EditText) findViewById(R.id.title_search_et_search);
+
         deseaseListView = new ScrollListView(this);
         medicineListView = new ScrollListView(this);
         scienceListView = new ScrollListView(this);
@@ -75,6 +84,13 @@ public class SearchResultLayout  extends Activity{
         setTextView(questionTextView,"相关问答");
         setTextView(scienceTextView,"相关科普");
 
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        kind = intent.getIntExtra("kind",0);
+        String url = GlobalAddress.SERVER +"/doctuser/generalsearch.php?"+"content=" + name + "&tag=" +kind;
+        et_Search.setText(name);
+        et_Search.setEnabled(false);
+        getDataServer.getGeneralSearch(this,url, deseaseListView, medicineListView, scienceListView, questionListView);
 
         deseaseListView.setAdapter(new SimpleAdapter(this,getDeseaseData(),R.layout.search_result_disease_item,
                 new String[] { "info"},

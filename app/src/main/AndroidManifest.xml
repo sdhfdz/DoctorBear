@@ -69,6 +69,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".Activity.UserTypeChooseActivity" />
         <activity android:name=".Activity.SearchLocationActivity" />
+        <activity android:name=".Activity.PushCommentActivity"></activity>
+        <activity android:name=".Activity.ExpertDetailActivity"></activity>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -95,6 +97,7 @@
                 android:scheme="rong" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.AnswerDetailActivity"/>
         <service
             android:name="io.rong.push.core.PushRegistrationService"
             android:exported="false">

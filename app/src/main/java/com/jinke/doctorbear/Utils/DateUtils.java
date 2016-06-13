@@ -22,9 +22,15 @@ public class DateUtils {
 
     /*时间戳转换成字符窜*/
     public String getDateToString(long time) {
-        Date d = new Date(time);
-        sf = new SimpleDateFormat("yyyy年MM月dd日");
-        return sf.format(d);
+        if (time == 0) {
+            return null;
+        }
+        time = time * 1000;
+        String result = "";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        result = format.format(new Date(time));
+        return result;
+
     }
 
     /*将字符串转为时间戳*/

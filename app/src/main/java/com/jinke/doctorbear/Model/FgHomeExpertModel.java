@@ -12,8 +12,9 @@ public class FgHomeExpertModel {
     String expertPicture;
     String like;
     String comment;
+    String ArticleID;
 
-    public FgHomeExpertModel(String iv_headImage, String nickName, String time, String expertTitle, String expertPicture, String like, String comment) {
+    public FgHomeExpertModel(String iv_headImage, String nickName, String time, String expertTitle, String expertPicture, String like, String comment,String ArticleID) {
         this.iv_headImage = iv_headImage;
         this.nickName = nickName;
         this.time = time;
@@ -21,6 +22,7 @@ public class FgHomeExpertModel {
         this.expertPicture = expertPicture;
         this.like = like;
         this.comment = comment;
+        this.ArticleID = ArticleID;
     }
 
     public String getExpertTitle() {
@@ -77,5 +79,13 @@ public class FgHomeExpertModel {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public void setArticleID(String articleID) {
+        ArticleID = articleID;
+    }
+
+    public String getArticleID() {
+        return ArticleID;
     }
 }

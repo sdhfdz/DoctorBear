@@ -1,16 +1,20 @@
 package com.jinke.doctorbear.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jinke.doctorbear.Activity.AnswerDetailActivity;
+import com.jinke.doctorbear.Activity.ExpertDetailActivity;
 import com.jinke.doctorbear.Bean.HomeAnswerBean;
 import com.jinke.doctorbear.Bean.HomeAnswerValueBean;
 import com.jinke.doctorbear.Bean.HomeExpertBean;
@@ -47,6 +51,7 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
 
     public ArrayList<FgHomeAnswerModel> listAnswer;
     public ArrayList<FgHomeExpertModel> listExpert;
+
 
     private AdpHomeFgAnswer adpHomeFgAnswer;
     private AdpHomeFgExpert adpHomeFgExper;
@@ -89,6 +94,7 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
             listAnswer = new ArrayList<FgHomeAnswerModel>();
             adpHomeFgAnswer = new AdpHomeFgAnswer(view.getContext(),listAnswer);
             getDataServer.getAnswerFromServer(context,listAnswer,listView_answer,adpHomeFgAnswer);
+            initAnswerListener();
 
             mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.home_answer_swipe_container);
             mSwipeLayout.setOnRefreshListener(this);
@@ -113,6 +119,7 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
             adpHomeFgVpExpert = new AdpHomeFgVpExpert(context,img_url);
             getDataServer.getExpertPictureFromServer(context,img_url,adpHomeFgVpExpert,viewPager_expert);
 
+            initExpertListener();
             //从服务器给listview添加数据
             adpHomeFgExper = new AdpHomeFgExpert(context,listExpert);
             getDataServer.getExpertFromServer(context,listExpert,listView_expert,adpHomeFgExper);
@@ -121,11 +128,25 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         container.addView(view);
         return view;
     }
+
+    private void initExpertListener() {
+        listView_expert.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("--------"+listExpert.get(position).getArticleID());
+                Intent intent = new Intent(context, ExpertDetailActivity.class);
+                intent.putExtra("ArticleID",listExpert.get(position).getArticleID());
+                context.startActivity(intent);
+            }
+        });
+    }
+
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         super.destroyItem(container, position, object);
         container.removeView((View) object);
     }
+
 
     @Override
     public void onRefresh() {
@@ -133,11 +154,18 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                listAnswer.clear();
                 mSwipeLayout.setRefreshing(false);
-           //     mListAdapter.notifyDataSetChanged();
+                System.out.println("communityID"+" "+adpHomeFgAnswer.communityID);
+                adpHomeFgAnswer = new AdpHomeFgAnswer(view.getContext(),listAnswer);
+                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "sinceID!=0";
+                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
+                adpHomeFgAnswer.notifyDataSetChanged();
             }
         }, 2000);
     }
+
+
 
     @Override
     public void onLoad() {
@@ -145,12 +173,30 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 mSwipeLayout.setLoading(false);
-          //      mListAdapter.notifyDataSetChanged();
+                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "lastID="+ adpHomeFgAnswer.communityID;
+                listAnswer.clear();
+//                listView_answer.removeAllViews();
+                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
+                adpHomeFgAnswer.notifyDataSetChanged();
             }
         }, 1000);
     }
 
 
+
+    public void initAnswerListener(){
+        listView_answer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("--------"+listAnswer.get(position).getCommunityID());
+                Intent intent = new Intent(context, AnswerDetailActivity.class);
+                intent.putExtra("CommunityID",listAnswer.get(position).getCommunityID());
+                context.startActivity(intent);
+            }
+        });
+
+    }
 
 }

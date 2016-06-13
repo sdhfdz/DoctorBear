@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/fg_home_answer_lv_layout_main"
     android:orientation="vertical">
     <LinearLayout
+        android:layout_marginLeft="14dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical">
@@ -17,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="小小飞行家"
-            android:textSize="15sp"
+            android:textSize="10sp"
             android:layout_marginLeft="5dp"
             android:textColor="@color/colorMain"/>
         <TextView
@@ -25,18 +27,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#9B9B9B"
-            android:textSize="12sp"
+            android:textSize="8sp"
             android:layout_marginLeft="10dp"
             android:text="2分钟前"/>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/fg_home_answer_lv_iv_picture"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:scaleType="matrix"
+        android:src="@mipmap/index_pageview_1"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        >
     <TextView
         android:id="@+id/fg_home_answer_lv_tv_answerTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="腹膜后及后腹腔巨大占位"
         android:layout_margin="5dp"
-        android:textSize="18sp"
+        android:textSize="12sp"
         android:textColor="#000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        >
     <TextView
         android:id="@+id/fg_home_answer_lv_tv_answerContent"
         android:layout_width="match_parent"
@@ -45,9 +68,12 @@
         android:ellipsize="end"
         android:text="患者性别：女  患者年龄：70  简要病史：发现血糖升高10余年，反复双下肢中度凹陷水肿半年，辅助检查：腹部CT"
         android:textColor="#4A4A4A"
-        android:textSize="15sp"
+        android:textSize="10sp"
         android:layout_margin="5dp"/>
+        </LinearLayout>
     <LinearLayout
+        android:layout_marginLeft="14dp"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -57,24 +83,20 @@
             android:layout_margin="5dp"
             android:gravity="center"
             android:text="神经科"
-            android:textSize="11sp"
-            android:background="@mipmap/fg_home_illness_category_bg"/>
+            android:textSize="8sp"
+            android:background="@drawable/pathematype_corners"/>
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/fg_home_comment"/>
         <TextView
             android:id="@+id/fg_home_answer_lv_tv_comment"
+            android:textSize="8sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="11"/>
     </LinearLayout>
-    <TextView
-        android:layout_marginTop="3dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#979797"/>
+
 </LinearLayout>
