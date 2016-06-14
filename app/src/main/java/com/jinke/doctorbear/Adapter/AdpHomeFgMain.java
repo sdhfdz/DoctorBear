@@ -154,13 +154,13 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                listAnswer.clear();
-                mSwipeLayout.setRefreshing(false);
-                System.out.println("communityID"+" "+adpHomeFgAnswer.communityID);
-                adpHomeFgAnswer = new AdpHomeFgAnswer(view.getContext(),listAnswer);
-                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "sinceID!=0";
-                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
-                adpHomeFgAnswer.notifyDataSetChanged();
+//                listAnswer.clear();
+//                mSwipeLayout.setRefreshing(false);
+//                System.out.println("communityID"+" "+adpHomeFgAnswer.communityID);
+//                adpHomeFgAnswer = new AdpHomeFgAnswer(view.getContext(),listAnswer);
+//                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "sinceID!=0";
+//                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
+//                adpHomeFgAnswer.notifyDataSetChanged();
             }
         }, 2000);
     }

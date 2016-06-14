@@ -9,6 +9,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -18,6 +19,10 @@ import android.widget.TextView;
 
 import com.jinke.doctorbear.Model.FgHomeAnswerModel;
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.CircleImageView;
+import com.jinke.doctorbear.Utils.GlobalAddress;
+import com.lidroid.xutils.BitmapUtils;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -90,11 +95,15 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
             holder.illness.setText(fgHomeAnswerModel.getIllness());
             holder.answerContent.setText(fgHomeAnswerModel.getAnswerContent());
             holder.time.setText(fgHomeAnswerModel.getTime());
-            Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
-            if (fgHomeAnswerModel.getPicture()==null){
+            Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).fit().into(holder.iv_headImage);
+            if (fgHomeAnswerModel.getPicture().equals( GlobalAddress.SERVER)){
                 holder.picture.setVisibility(View.GONE);
             }else {
-                Picasso.with(context).load(fgHomeAnswerModel.getPicture()).into(holder.picture);
+                WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                int width = wm.getDefaultDisplay().getWidth();
+                Picasso.with(context).load(fgHomeAnswerModel.getPicture()).resize(width-28,300)
+                        .centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.picture);
+
             }
 
     }
@@ -107,7 +116,7 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
      */
     private void initView(ViewHolder holder, View convertView, int position) {
 
-        holder.iv_headImage = (ImageView) convertView.findViewById(R.id.fg_home_answer_lv_iv_head);
+        holder.iv_headImage = (CircleImageView) convertView.findViewById(R.id.fg_home_answer_lv_iv_head);
         holder.answerContent = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_answerContent);
         holder.answerTitle = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_answerTitle);
         holder.nickName = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_nickname);
@@ -115,11 +124,10 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
         holder.illness = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_illness);
         holder.comment = (TextView) convertView.findViewById(R.id.fg_home_answer_lv_tv_comment);
         holder.picture = (ImageView) convertView.findViewById(R.id.fg_home_answer_lv_iv_picture);
-        holder.linearLayout = (LinearLayout) convertView.findViewById(R.id.fg_home_answer_lv_layout_main);
     }
 
     public class ViewHolder{
-        ImageView iv_headImage;
+        CircleImageView iv_headImage;
         TextView nickName;
         TextView time;
         TextView answerTitle;
@@ -127,6 +135,5 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
         TextView illness;
         TextView comment;
         ImageView picture;
-        LinearLayout linearLayout;
     }
 }

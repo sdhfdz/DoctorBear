@@ -2,101 +2,111 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/fg_home_answer_lv_layout_main"
     android:orientation="vertical">
+
     <LinearLayout
-        android:layout_marginLeft="14dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="14dp"
         android:gravity="center_vertical">
-        <ImageView
+
+        <com.jinke.doctorbear.Utils.CircleImageView
             android:id="@+id/fg_home_answer_lv_iv_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@mipmap/head"/>
+            android:src="@mipmap/head" />
+
         <TextView
             android:id="@+id/fg_home_answer_lv_tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="小小飞行家"
-            android:textSize="10sp"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/colorMain"/>
+            android:text="小小飞行家"
+            android:textColor="@color/colorMain"
+            android:textSize="10sp" />
+
         <TextView
             android:id="@+id/fg_home_answer_lv_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="2分钟前"
             android:textColor="#9B9B9B"
-            android:textSize="8sp"
-            android:layout_marginLeft="10dp"
-            android:text="2分钟前"/>
+            android:textSize="8sp" />
     </LinearLayout>
+
     <ImageView
         android:id="@+id/fg_home_answer_lv_iv_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:contentDescription="问答图片"
         android:scaleType="matrix"
         android:src="@mipmap/index_pageview_1"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        >
-    <TextView
-        android:id="@+id/fg_home_answer_lv_tv_answerTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="腹膜后及后腹腔巨大占位"
-        android:layout_margin="5dp"
-        android:textSize="12sp"
-        android:textColor="#000"/>
+        android:layout_marginLeft="14dp">
+
+        <TextView
+            android:id="@+id/fg_home_answer_lv_tv_answerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="腹膜后及后腹腔巨大占位"
+            android:textColor="#000"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        >
-    <TextView
-        android:id="@+id/fg_home_answer_lv_tv_answerContent"
+        android:layout_marginLeft="14dp">
+
+        <TextView
+            android:id="@+id/fg_home_answer_lv_tv_answerContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text=""
+            android:textColor="#4A4A4A"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:text="患者性别：女  患者年龄：70  简要病史：发现血糖升高10余年，反复双下肢中度凹陷水肿半年，辅助检查：腹部CT"
-        android:textColor="#4A4A4A"
-        android:textSize="10sp"
-        android:layout_margin="5dp"/>
-        </LinearLayout>
-    <LinearLayout
-        android:layout_marginLeft="14dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginStart="14dp"
+        android:gravity="center_vertical">
+
         <TextView
             android:id="@+id/fg_home_answer_lv_tv_illness"
             android:layout_width="50dp"
             android:layout_height="20dp"
             android:layout_margin="5dp"
+            android:background="@drawable/pathematype_corners"
             android:gravity="center"
             android:text="神经科"
-            android:textSize="8sp"
-            android:background="@drawable/pathematype_corners"/>
+            android:textSize="8sp" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/fg_home_comment"/>
+            android:layout_marginStart="10dp"
+            android:src="@mipmap/fg_home_comment" />
+
         <TextView
             android:id="@+id/fg_home_answer_lv_tv_comment"
-            android:textSize="8sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="11"/>
+            android:text="11"
+            android:textSize="8sp" />
     </LinearLayout>
 
 </LinearLayout>
