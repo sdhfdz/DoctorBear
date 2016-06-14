@@ -58,7 +58,7 @@
         <activity android:name=".Activity.SearchResultLayout" />
         <activity android:name=".Activity.MyCollectionActivity" />
         <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.SearchAllActivity" />
+        <activity android:name=".Activity.SearchALLActivity" />
         <activity
             android:name=".Activity.BearSmartActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
