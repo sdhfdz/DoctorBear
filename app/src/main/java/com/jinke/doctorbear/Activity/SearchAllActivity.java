@@ -16,7 +16,7 @@ import com.jinke.doctorbear.R;
  * 搜索页面,疾病,药品,医院,莆田集成
  * Created by Max on 2016/5/19.
  */
-public class SearchALLActivity extends Activity implements View.OnClickListener{
+public class SearchAllActivity extends Activity implements View.OnClickListener{
     String name;
 
     private TextView tv_Search1;
@@ -143,7 +143,7 @@ public class SearchALLActivity extends Activity implements View.OnClickListener{
 
                 String name = et_Search.getText().toString();
                 System.out.println("DATADATA:"+name);
-                Intent intent_s = new Intent(SearchALLActivity.this, SearchResultLayout.class);
+                Intent intent_s = new Intent(SearchAllActivity.this, SearchResultLayout.class);
                 intent_s.putExtra("kind",S_FLAG);//默认疾病
                 intent_s.putExtra("name",name);
                 startActivity(intent_s);
