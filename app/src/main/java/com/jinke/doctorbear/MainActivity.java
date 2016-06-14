@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
         }else{
             connect(GlobalAddress.getToken(MainActivity.this));
+
             System.out.println(GlobalAddress.getToken(MainActivity.this)+"lalalalallalalallalalaa");
         }
     }
@@ -182,6 +183,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         @Override
         public void onSuccess(String s) {
 
+            RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(MainActivity.this),
+                    GlobalAddress.getUserName(MainActivity.this), Uri.parse(GlobalAddress.getUserIcon(MainActivity.this))));
+            RongIM.getInstance().setMessageAttachedUserInfo(true);
             System.out.println("OnSuccess"+"---------------------");
         }
 
@@ -210,7 +214,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         public boolean onReceived(Message message, int left) {
             //开发者根据自己需求自行处理
             System.out.println(message.getSenderUserId()+message.getContent()+"nihaonihao");
-//            if (GlobalAddress.getUserId(MainActivity.this).equals("3963183378")){
+            if (GlobalAddress.getUserId(MainActivity.this).equals("3963183378")){
 //                RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(MainActivity.this),
 //                        GlobalAddress.getUserName(MainActivity.this), Uri.parse(GlobalAddress.getUserIcon(MainActivity.this))));
 //                System.out.println(GlobalAddress.getUserId(MainActivity.this)+"测试一下id");
@@ -218,34 +222,29 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 //                    RongIM.getInstance().startPrivateChat(MainActivity.this,message.getSenderUserId(),null);
 //                }
 //
-//            }
 
-            RongIM.getInstance().setCurrentUserInfo(new UserInfo(GlobalAddress.getUserId(MainActivity.this),
-                        GlobalAddress.getUserName(MainActivity.this), Uri.parse(GlobalAddress.getUserIcon(MainActivity.this))));
 
-            Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon().appendPath("conversation").appendPath(Conversation.ConversationType.PRIVATE.getName().toLowerCase()).appendQueryParameter("targetId",
-                    message.getSenderUserId()).appendQueryParameter("title", "用户").build();
-            Intent it=new Intent("android.intent.action.VIEW", uri);
-            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, it, 0);
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this);
-            mBuilder.setSmallIcon(R.drawable.bear_icon);
-            mBuilder.setContentTitle("熊大夫");//设置通知栏标题
-            mBuilder.setContentText("您收到了消息！");
-       //     UserInfo userInfo=message.getContent().getUserInfo();
-//            if (userInfo==null){
-//                System.out.println("userinfo is null");
-//            }
-          //  System.out.println(message.getContent().getUserInfo().toString());
-            mBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
-            mBuilder.setContentIntent(pendingIntent);
-            mBuilder.setAutoCancel(true);
-            mBuilder.setWhen(System.currentTimeMillis());
-            mBuilder.setTicker(message.getExtra());
-          //  mBuilder.setNumber(3);
-            Notification notification = mBuilder.build();
-            //notification.flags = Notification.FLAG_AUTO_CANCEL;
-            mNotificationManager.notify(1, notification);
-            System.out.println(message.toString()+":"+left+"asdfaoids");
+                Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon().appendPath("conversation").appendPath(Conversation.ConversationType.PRIVATE.getName().toLowerCase()).appendQueryParameter("targetId",
+                        message.getSenderUserId()).appendQueryParameter("title", null).build();
+                Intent it=new Intent("android.intent.action.VIEW", uri);
+                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, it, 0);
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this);
+                mBuilder.setSmallIcon(R.drawable.bear_icon);
+                mBuilder.setContentTitle("熊大夫");//设置通知栏标题
+                mBuilder.setContentText("您收到了消息！");
+
+                mBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
+                mBuilder.setContentIntent(pendingIntent);
+                mBuilder.setAutoCancel(true);
+                mBuilder.setWhen(System.currentTimeMillis());
+                mBuilder.setTicker(message.getExtra());
+                //  mBuilder.setNumber(3);
+                Notification notification = mBuilder.build();
+                //notification.flags = Notification.FLAG_AUTO_CANCEL;
+                mNotificationManager.notify(1, notification);
+                System.out.println(message.toString()+":"+left+"asdfaoids");
+            }
+
 
             return true;
         }
