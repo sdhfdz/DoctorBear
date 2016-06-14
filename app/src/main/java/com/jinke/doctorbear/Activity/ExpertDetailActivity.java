@@ -141,11 +141,13 @@ public class ExpertDetailActivity extends Activity {
             public void onClick(View v) {
                 if (Fav.equals("1")) {
                     iv_articalFav.setImageResource(R.mipmap.artical_fav);
-                    Toast.makeText(getApplicationContext(),"取消收藏",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "取消收藏", Toast.LENGTH_LONG).show();
+                    Fav = "0";
 
-                }else {
+                } else {
                     iv_articalFav.setImageResource(R.mipmap.artical_fav_on);
                     Toast.makeText(getApplicationContext(), "收藏成功", Toast.LENGTH_LONG).show();
+                    Fav = "1";
                 }
                 HttpUtils http = new HttpUtils();
                 http.configCurrentHttpCacheExpiry(1);
@@ -164,7 +166,16 @@ public class ExpertDetailActivity extends Activity {
         tv_subcribelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"订阅成功",Toast.LENGTH_LONG).show();
+                if (Sub.equals("1")) {
+                    iv_articalFav.setImageResource(R.mipmap.artical_fav);
+                    Toast.makeText(getApplicationContext(), "取消订阅", Toast.LENGTH_LONG).show();
+                    Sub = "0";
+
+                } else {
+                    iv_articalFav.setImageResource(R.mipmap.artical_fav_on);
+                    Toast.makeText(getApplicationContext(), "订阅成功", Toast.LENGTH_LONG).show();
+                    Sub = "1";
+                }
 
                 HttpUtils http = new HttpUtils();
                 http.configCurrentHttpCacheExpiry(1);
@@ -172,11 +183,8 @@ public class ExpertDetailActivity extends Activity {
 
                 params.addBodyParameter("PathemaTypeID",tv_pathemaType.getText().toString());
                 params.addBodyParameter("UserID",UserID);
-                if (Sub.equals("0")) {
-                    params.addBodyParameter("sub", "1");
-                }else {
-                    params.addBodyParameter("sub", "0");
-                }
+                params.addBodyParameter("sub", Sub);
+
                 try {
                     http.sendSync(HttpRequest.HttpMethod.POST, GlobalAddress.SERVER+"/doctuser/setsubscribe.php",params);
                 } catch (HttpException e) {

@@ -13,12 +13,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jinke.doctorbear.Activity.SearchAllActivity;
+import com.jinke.doctorbear.Activity.SearchALLActivity;
 import com.jinke.doctorbear.Activity.SearchResultLayout;
 import com.jinke.doctorbear.Activity.SearchLocationActivity;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.GetDataServer;
-import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
@@ -118,17 +117,17 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
 				startActivity(intent);
                 break;
             case R.id.fg_search_iv_disease:
-				Intent intent_disease = new Intent(getActivity(), SearchAllActivity.class);
+				Intent intent_disease = new Intent(getActivity(), SearchALLActivity.class);
 				intent_disease.putExtra("kind","disease");
 				startActivity(intent_disease);
                 break;
             case R.id.fg_search_iv_capsule:
-				Intent intent_capsule = new Intent(getActivity(), SearchAllActivity.class);
+				Intent intent_capsule = new Intent(getActivity(), SearchALLActivity.class);
 				intent_capsule.putExtra("kind","capsule");
 				startActivity(intent_capsule);
                 break;
             case R.id.fg_search_iv_hospital:
-				Intent intent_hospital = new Intent(getActivity(), SearchAllActivity.class);
+				Intent intent_hospital = new Intent(getActivity(), SearchALLActivity.class);
 				intent_hospital.putExtra("kind","hospital");
 				startActivity(intent_hospital);
                 break;
@@ -138,7 +137,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
 
                 break;
             case R.id.fg_search_iv_putian:
-				Intent intent_putian = new Intent(getActivity(), SearchAllActivity.class);
+				Intent intent_putian = new Intent(getActivity(), SearchALLActivity.class);
 				intent_putian.putExtra("kind","putian");
 				startActivity(intent_putian);
                 break;

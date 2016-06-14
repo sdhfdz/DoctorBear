@@ -3,9 +3,7 @@ package com.jinke.doctorbear.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +31,9 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.squareup.picasso.Picasso;
 
-import java.net.URL;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,14 +91,15 @@ public class AnswerDetailActivity extends Activity {
     }
 
     private void initData() {
+        UserID = GlobalAddress.getUserId(this);
+
         Intent intent = getIntent();
         id = intent.getStringExtra("CommunityID");
         System.out.println("id +++:" + id);
-        String url = GlobalAddress.SERVER + "/doctuser/community_detail.php?" + "CommunityID=" + id;
+        String url = GlobalAddress.SERVER + "/doctuser/community_detail.php?" + "CommunityID=" + id + "&UserID=" + UserID;
         getAnswerDetail(this, url);
 
 
-        Log.i(TAG,GlobalAddress.getToken(this));
     }
 
     private void initListener() {
@@ -112,7 +113,7 @@ public class AnswerDetailActivity extends Activity {
         layout_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"点赞成功",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "点赞成功", Toast.LENGTH_LONG).show();
             }
         });
         layout_comment.setOnClickListener(new View.OnClickListener() {
@@ -131,40 +132,52 @@ public class AnswerDetailActivity extends Activity {
         layout_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"转发成功",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "转发成功", Toast.LENGTH_LONG).show();
             }
         });
 
         iv_articalFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Fav == null)
+                    Fav = "0";
                 if (Fav.equals("1")) {
                     iv_articalFav.setImageResource(R.mipmap.artical_fav);
-                    Toast.makeText(getApplicationContext(),"取消收藏",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "取消收藏", Toast.LENGTH_LONG).show();
+                    Fav = "0";
 
-                }else {
+                } else {
                     iv_articalFav.setImageResource(R.mipmap.artical_fav_on);
                     Toast.makeText(getApplicationContext(), "收藏成功", Toast.LENGTH_LONG).show();
+                    Fav = "1";
                 }
                 HttpUtils http = new HttpUtils();
                 http.configCurrentHttpCacheExpiry(1);
                 RequestParams params = new RequestParams();
 
-                params.addBodyParameter("CommunityID",id);
-                params.addBodyParameter("UserID",UserID);
-                params.addBodyParameter("Fav",Fav);
-                try {
-                    http.sendSync(HttpRequest.HttpMethod.POST, GlobalAddress.SERVER+"/doctuser/setfavourite.php",params);
-                } catch (HttpException e) {
-                    e.printStackTrace();
-                }
+                params.addBodyParameter("CommunityID", id);
+                params.addBodyParameter("UserID", UserID);
+                params.addBodyParameter("Fav", Fav);
+                Log.e("CommunityIDUserIDFav",id+" "+UserID+" " +Fav);
+
+                http.send(HttpRequest.HttpMethod.POST, GlobalAddress.SERVER + "/doctuser/setfavourite.php", params, new MyrequestCallBack());
+
 
             }
         });
         tv_subcribelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"订阅成功",Toast.LENGTH_LONG).show();
+                if (Sub.equals("1")) {
+                    iv_articalFav.setImageResource(R.mipmap.artical_fav);
+                    Toast.makeText(getApplicationContext(), "取消订阅", Toast.LENGTH_LONG).show();
+                    Sub = "0";
+
+                } else {
+                    iv_articalFav.setImageResource(R.mipmap.artical_fav_on);
+                    Toast.makeText(getApplicationContext(), "订阅成功", Toast.LENGTH_LONG).show();
+                    Sub = "1";
+                }
 
                 HttpUtils http = new HttpUtils();
                 http.configCurrentHttpCacheExpiry(1);
@@ -172,11 +185,8 @@ public class AnswerDetailActivity extends Activity {
 
                 params.addBodyParameter("PathemaTypeID",tv_pathemaType.getText().toString());
                 params.addBodyParameter("UserID",UserID);
-                if (Sub.equals("0")) {
-                    params.addBodyParameter("sub", "1");
-                }else {
-                    params.addBodyParameter("sub", "0");
-                }
+                params.addBodyParameter("sub", Sub);
+
                 try {
                     http.sendSync(HttpRequest.HttpMethod.POST, GlobalAddress.SERVER+"/doctuser/setsubscribe.php",params);
                 } catch (HttpException e) {
@@ -184,7 +194,6 @@ public class AnswerDetailActivity extends Activity {
                 }
             }
         });
-
 
 
     }
@@ -254,16 +263,18 @@ public class AnswerDetailActivity extends Activity {
         answerDetailComments = answerDetailBean.Comment;
 
 
-        tv_pathemaType.setText(answerDetailBeanValue.PathemaTypeID);
-        tv_pathemaType2.setText(answerDetailBeanValue.PathemaTypeID);
+        tv_pathemaType.setText(answerDetailBeanValue.PathemaType.PathemaTypeName);
+        tv_pathemaType2.setText(answerDetailBeanValue.PathemaType.PathemaTypeName);
         Sub = answerDetailBeanValue.sub;
-        if (Sub == null){
-            Sub ="0";
+        if (Sub == null) {
+            Sub = "0";
         }
-        if ((Fav = answerDetailBeanValue.sub) != null) {
+        if ((Fav = answerDetailBeanValue.fav) != null) {
             if (Fav.equals("1")) {
                 iv_articalFav.setImageResource(R.mipmap.artical_fav_on);
             }
+        } else {
+            Fav = "0";
         }
         tv_articalTitle.setText(answerDetailBeanValue.CommunityTitle);
         if (answerDetailBeanValue.CommunityPic.equals("null")) {
@@ -276,7 +287,6 @@ public class AnswerDetailActivity extends Activity {
         tv_like.setText(answerDetailBeanValue.Likenum);
         tv_comment.setText(answerDetailBeanValue.Comm);
         tv_report.setText(answerDetailBeanValue.Send);
-        UserID = answerDetailBeanValue.UserID;
 
 
 //        评论数据
@@ -314,9 +324,8 @@ public class AnswerDetailActivity extends Activity {
         String[] AnswerContent = new String[30];
         String[] CommunityID = new String[30];
         String[] Picture = new String[30];
-
         for (int i = 0; i < answerDetailConcerneds.size(); i++) {
-            Picture[i] = GlobalAddress.SERVER+answerDetailConcerneds.get(i).getCommunityPic();
+            Picture[i] = GlobalAddress.SERVER + answerDetailConcerneds.get(i).getCommunityPic();
             Iv_headImage[i] = answerDetailConcerneds.get(i).User.getUserIcon();
             NickName[i] = answerDetailConcerneds.get(i).User.getUserName();
             Comment[i] = answerDetailConcerneds.get(i).getComm();
@@ -325,6 +334,7 @@ public class AnswerDetailActivity extends Activity {
             CommunityID[i] = answerDetailConcerneds.get(i).getCommunityID();
             Time[i] = dateUtils.getDateToString(Long.valueOf(answerDetailConcerneds.get(i).getCreateTime()).longValue());
             AnswerContent[i] = answerDetailConcerneds.get(i).getCommunityDesc();
+            Log.e(TAG,Illness[i]+Comment[i]);
             FgHomeAnswerModel fgHomeAnswerModel = new FgHomeAnswerModel(Iv_headImage[i], NickName[i], AnswerTitle[i], Time[i], AnswerContent[i], Illness[i], Comment[i], Picture[i], CommunityID[i]);
             listconcerned.add(fgHomeAnswerModel);
         }
@@ -332,9 +342,29 @@ public class AnswerDetailActivity extends Activity {
 
     }
 
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 //        onCreate(null);
     }
 
+    class MyrequestCallBack extends RequestCallBack {
+        @Override
+        public void onSuccess(ResponseInfo responseInfo) {
+            JSONObject jsonObject= null;
+            try {
+                jsonObject = new JSONObject(responseInfo.result.toString());
+                String result=jsonObject.getString("sql");
+                Log.e("error!!!!!!!!!!!!!!",result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.e(TAG, "操作成功");
+        }
+
+        @Override
+        public void onFailure(HttpException e, String s) {
+            System.out.println(s + "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+        }
+    }
 }

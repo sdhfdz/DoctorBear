@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,6 @@ import com.jinke.doctorbear.Utils.DateUtils;
 import com.jinke.doctorbear.Utils.GetDataServer;
 import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.jinke.doctorbear.Utils.ScrollListView;
-import com.jinke.doctorbear.Utils.SwipeRefresh.SwipeRefreshLayout;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -43,7 +43,7 @@ import java.util.List;
  * 一个问答界面，一个科普界面
  * Created by Max on 2016/5/16.
  */
-public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.OnRefreshListener{
     private Context context;
     private View view;
 
@@ -60,6 +60,7 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
     private ViewPager viewPager_expert;
     private ListView listView_answer;
     private ScrollListView listView_expert;
+
     private  SwipeRefreshLayout mSwipeLayout;
 
     private String[] img_id = new String[10];      //科普轮播图片id
@@ -96,15 +97,15 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
             getDataServer.getAnswerFromServer(context,listAnswer,listView_answer,adpHomeFgAnswer);
             initAnswerListener();
 
-            mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.home_answer_swipe_container);
+            mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.home_answer_swipe);
             mSwipeLayout.setOnRefreshListener(this);
-            mSwipeLayout.setOnLoadListener(this);
-            mSwipeLayout.setColor(android.R.color.holo_blue_bright,
+            //mSwipeLayout.setOnLoadListener(this);
+
+            mSwipeLayout.setColorSchemeColors(android.R.color.holo_blue_bright,
                     android.R.color.holo_green_light,
                     android.R.color.holo_orange_light,
                     android.R.color.holo_red_light);
-            mSwipeLayout.setMode(SwipeRefreshLayout.Mode.BOTH);
-            mSwipeLayout.setLoadNoFull(false);
+            //mSwipeLayout.setLoadNoFull(false);
         }
         //科普界面
         if (position==1){
@@ -154,35 +155,35 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                listAnswer.clear();
-                mSwipeLayout.setRefreshing(false);
-                System.out.println("communityID"+" "+adpHomeFgAnswer.communityID);
-                adpHomeFgAnswer = new AdpHomeFgAnswer(view.getContext(),listAnswer);
-                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "sinceID!=0";
-                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
-                adpHomeFgAnswer.notifyDataSetChanged();
+//                listAnswer.clear();
+//                mSwipeLayout.setRefreshing(false);
+//                System.out.println("communityID"+" "+adpHomeFgAnswer.communityID);
+//                adpHomeFgAnswer = new AdpHomeFgAnswer(view.getContext(),listAnswer);
+//                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "sinceID!=0";
+//                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
+//                adpHomeFgAnswer.notifyDataSetChanged();
             }
         }, 2000);
     }
 
 
 
-    @Override
-    public void onLoad() {
-        //values.add("Add " + values.size());
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                mSwipeLayout.setLoading(false);
-                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "lastID="+ adpHomeFgAnswer.communityID;
-                listAnswer.clear();
-//                listView_answer.removeAllViews();
-                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
-                adpHomeFgAnswer.notifyDataSetChanged();
-            }
-        }, 1000);
-    }
+//    @Override
+//    public void onLoad() {
+//        //values.add("Add " + values.size());
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                mSwipeLayout.setLoading(false);
+//                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "lastID="+ adpHomeFgAnswer.communityID;
+//                listAnswer.clear();
+////                listView_answer.removeAllViews();
+//                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
+//                adpHomeFgAnswer.notifyDataSetChanged();
+//            }
+//        }, 1000);
+//    }
 
 
 
