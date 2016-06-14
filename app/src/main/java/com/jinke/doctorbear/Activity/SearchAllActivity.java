@@ -17,8 +17,6 @@ import com.jinke.doctorbear.R;
  * Created by Max on 2016/5/19.
  */
 public class SearchAllActivity extends Activity implements View.OnClickListener{
-    String name;
-
     private TextView tv_Search1;
     private TextView tv_Search2;
     private TextView tv_Search3;
