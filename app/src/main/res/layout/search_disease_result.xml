@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorGrayTitleBG">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:src="@mipmap/navigation_back"/>
+
+        <TextView android:id="@+id/search_disease_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="糖尿病"/>
+    </LinearLayout>
+
+    <TextView android:id="@+id/search_disease_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="#030303"
+        android:textSize="17sp"
+        android:text="糖尿病"/>
+
+    <TextView android:id="@+id/search_disease_description_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:textColor="@color/colorGrayFont"
+        android:textSize="15sp"
+        android:text="糖尿病是一种受遗传因素、环境因素及生活习惯所影响导致的一种慢性代谢性疾病。主要原因是人体胰腺不能正常产生胰岛素（胰岛素缺乏）或身体不能正常利用胰岛素（胰岛素抵抗），导致血糖高于正常的一种综合征。"/>
+
+
+</LinearLayout>
