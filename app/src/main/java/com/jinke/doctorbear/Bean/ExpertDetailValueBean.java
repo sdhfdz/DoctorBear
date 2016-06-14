@@ -14,6 +14,11 @@ public class ExpertDetailValueBean {
     public String CreateTime;//创建时间
     public String ArticleID;
     public User User;
+    public PathemaType PathemaType;
+    public static class PathemaType{
+        public String PathemaTypeID;
+        public String PathemaTypeName;
+    }
     public static class User {
         public String UserIcon;
         public String UserName;

@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGrayTitleBG"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -216,6 +218,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
@@ -227,7 +230,7 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
-                    android:text="用户评论" />
+                    android:text="评论" />
 
                 <com.jinke.doctorbear.Utils.ScrollListView
                     android:id="@+id/activity_expert_detail_lv_comment"
@@ -259,82 +262,87 @@
             </LinearLayout>
 
 
-            <!--底部编辑栏-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="4dp"
-                android:background="@color/colorRuleLine"
-                android:orientation="horizontal"
-                android:weightSum="3">
 
-                <LinearLayout
-                    android:id="@+id/activity_expert_detail_layout_social_like"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/artical_social_like" />
-
-                    <TextView
-                        android:id="@+id/activity_expert_detail_tv_social_like"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="32"
-                        android:textColor="@color/colorDetail" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/activity_expert_detail_layout_social_comment"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/artical_social_comment" />
-
-                    <TextView
-                        android:id="@+id/activity_expert_detail_tv_social_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="233"
-                        android:textColor="@color/colorDetail" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/activity_expert_detail_layout_social_report"
-                    android:layout_width="0px"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/artical_social_report" />
-
-                    <TextView
-                        android:id="@+id/activity_expert_detail_tv_social_report"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2"
-                        android:textColor="@color/colorDetail" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:textColor="@color/colorRuleLine"/>
+    <!--底部编辑栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorRuleLine"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:id="@+id/activity_expert_detail_layout_social_like"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp"
+                android:src="@mipmap/artical_social_like" />
+
+            <TextView
+                android:id="@+id/activity_expert_detail_tv_social_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="32"
+                android:textColor="@color/colorDetail" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_expert_detail_layout_social_comment"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp"
+                android:src="@mipmap/artical_social_comment" />
+
+            <TextView
+                android:id="@+id/activity_expert_detail_tv_social_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="233"
+                android:textColor="@color/colorDetail" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_expert_detail_layout_social_report"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp"
+                android:src="@mipmap/artical_social_report" />
+
+            <TextView
+                android:id="@+id/activity_expert_detail_tv_social_report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textColor="@color/colorDetail" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

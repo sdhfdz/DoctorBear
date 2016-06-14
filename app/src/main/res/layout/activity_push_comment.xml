@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <RelativeLayout
         android:layout_height="56dp"
@@ -42,10 +45,17 @@
             android:textSize="12sp"
             android:text="发布" />
     </RelativeLayout>
-    <EditText
-        android:id="@+id/activity_push_comment_et_comment"
+    <EditText android:id="@+id/activity_push_comment_et_comment"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"/>
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:gravity="start"
+        android:hint="输入评论..."
+        android:textSize="12sp"/>
+
 
 </LinearLayout>
