@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 问答详情页面
  * Created by Max on 2016/5/31.
  */
 public class AnswerDetailActivity extends Activity {

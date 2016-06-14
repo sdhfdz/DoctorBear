@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 科普详情页面
  * Created by Max on 2016/6/12.
  */
 public class ExpertDetailActivity extends Activity {
