@@ -7,7 +7,5 @@ import java.util.List;
  */
 public class DiseaseDetailBean {
         public String PathemaName;
-       // public String PathamaNull;
-      //  public String PathemaTypeID;
         public String PathemaCont;//疾病详情
 }
