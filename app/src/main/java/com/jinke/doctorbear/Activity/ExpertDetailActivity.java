@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 科普详情页面
  * Created by Max on 2016/6/12.
  */
 public class ExpertDetailActivity extends Activity {
@@ -95,10 +97,11 @@ public class ExpertDetailActivity extends Activity {
         Intent intent = getIntent();
         id = intent.getStringExtra("ArticleID");
         System.out.println("id +++:" + id);
+
+    }
+    private void getGlobalAddress(){
         String url = GlobalAddress.SERVER + "/doctuser/article_detail.php?" + "ArticleID=" + id ;
         getExpertDetail(this, url);
-
-
     }
 
     private void initListener() {
@@ -193,7 +196,15 @@ public class ExpertDetailActivity extends Activity {
             }
         });
 
-
+        lv_concerned.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("--------"+listconcerned.get(position).getArticleID());
+                Intent intent = new Intent(getApplicationContext(), ExpertDetailActivity.class);
+                intent.putExtra("ArticleID",listconcerned.get(position).getArticleID());
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -266,7 +277,8 @@ public class ExpertDetailActivity extends Activity {
         expertDetailComments = expertDetailBean.Comment;
         user = expertDetailValueBean.User;
 
-        tv_pathemaType.setText(expertDetailValueBean.PathemaTypeID);
+        tv_pathemaType.setText(expertDetailValueBean.PathemaType.PathemaTypeName);
+        tv_pathemaType2.setText(expertDetailValueBean.PathemaType.PathemaTypeName);
         Sub = expertDetailValueBean.sub;
         if ((Fav=expertDetailValueBean.sub) != null) {
             if (Fav.equals("1")) {
@@ -333,5 +345,11 @@ public class ExpertDetailActivity extends Activity {
 
     }
 
-
+    protected void onResume() {
+        super.onResume();
+//        onCreate(null);
+//        initData();
+        Log.d(TAG,"onResume");
+        getGlobalAddress();
+    }
 }

@@ -10,33 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jinke.doctorbear.Model.FgHomeAnswerModel;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.CircleImageView;
 import com.jinke.doctorbear.Utils.GlobalAddress;
-import com.lidroid.xutils.BitmapUtils;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
     boolean data;
     public String communityID;
+
     public AdpHomeFgAnswer(Context context, List<FgHomeAnswerModel> listAnswer) {
-        super(context,listAnswer);
+        super(context, listAnswer);
     }
 
-    public AdpHomeFgAnswer(Context context,List<FgHomeAnswerModel> list, boolean data ) {
-        super(context,list);
+    public AdpHomeFgAnswer(Context context, List<FgHomeAnswerModel> list, boolean data) {
+        super(context, list);
         this.data = data;
 
     }
@@ -60,13 +55,12 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
 
-        if (convertView == null){
+        if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.fg_home_answer_lv_item, null);
             //存对象到view里。
             holder = new ViewHolder();
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         init(holder, convertView, position);
@@ -74,42 +68,45 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
     }
 
     private void init(ViewHolder holder, View convertView, int position) {
-        initView(holder,convertView,position);
-        initData(holder,position);
+        initView(holder, convertView, position);
+        initData(holder, position);
     }
 
     /**
      * 初始化listview数据
+     *
      * @param holder
      * @param position
      */
-    private void initData(ViewHolder holder,  int position) {
+    private void initData(ViewHolder holder, int position) {
 
-            FgHomeAnswerModel fgHomeAnswerModel = list.get(position);
-            if (fgHomeAnswerModel == null) {
-                return;
-            }
-            holder.comment.setText(fgHomeAnswerModel.getComment());
-            holder.nickName.setText(fgHomeAnswerModel.getNickName());
-            holder.answerTitle.setText(fgHomeAnswerModel.getAnswerTitle());
-            holder.illness.setText(fgHomeAnswerModel.getIllness());
-            holder.answerContent.setText(fgHomeAnswerModel.getAnswerContent());
-            holder.time.setText(fgHomeAnswerModel.getTime());
-            Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).fit().into(holder.iv_headImage);
-            if (fgHomeAnswerModel.getPicture().equals( GlobalAddress.SERVER)){
-                holder.picture.setVisibility(View.GONE);
-            }else {
-                WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-                int width = wm.getDefaultDisplay().getWidth();
-                Picasso.with(context).load(fgHomeAnswerModel.getPicture()).resize(width-28,300)
-                        .centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.picture);
+        FgHomeAnswerModel fgHomeAnswerModel = list.get(position);
+        if (fgHomeAnswerModel == null) {
+            return;
+        }
+        holder.comment.setText(fgHomeAnswerModel.getComment());
+        holder.nickName.setText(fgHomeAnswerModel.getNickName());
+        holder.answerTitle.setText(fgHomeAnswerModel.getAnswerTitle());
+        holder.illness.setText(fgHomeAnswerModel.getIllness());
+        holder.answerContent.setText(fgHomeAnswerModel.getAnswerContent());
+        holder.time.setText(fgHomeAnswerModel.getTime());
+        Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
+        if (fgHomeAnswerModel.getPicture().equals(GlobalAddress.SERVER)) {
+            holder.picture.setVisibility(View.GONE);
+        } else {
+            holder.picture.setVisibility(View.VISIBLE);
+            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            int width = wm.getDefaultDisplay().getWidth();
+            Picasso.with(context).load(fgHomeAnswerModel.getPicture()).resize(width - 28, 300)
+                    .centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder.picture);
 
-            }
+        }
 
     }
 
     /**
      * 初始化所有控件
+     *
      * @param holder
      * @param convertView
      * @param position
@@ -126,7 +123,7 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
         holder.picture = (ImageView) convertView.findViewById(R.id.fg_home_answer_lv_iv_picture);
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         CircleImageView iv_headImage;
         TextView nickName;
         TextView time;

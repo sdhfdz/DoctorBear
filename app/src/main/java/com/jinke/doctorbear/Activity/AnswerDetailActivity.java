@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 问答详情页面
  * Created by Max on 2016/5/31.
  */
 public class AnswerDetailActivity extends Activity {
@@ -96,10 +98,16 @@ public class AnswerDetailActivity extends Activity {
         Intent intent = getIntent();
         id = intent.getStringExtra("CommunityID");
         System.out.println("id +++:" + id);
+
+
+//        String url = GlobalAddress.SERVER + "/doctuser/community_detail.php?" + "CommunityID=" + id + "&UserID=" + UserID;
+//        getAnswerDetail(this, url);
+//        reqGlobalAddress();
+    }
+
+    private void reqGlobalAddress(){
         String url = GlobalAddress.SERVER + "/doctuser/community_detail.php?" + "CommunityID=" + id + "&UserID=" + UserID;
         getAnswerDetail(this, url);
-
-
     }
 
     private void initListener() {
@@ -116,6 +124,7 @@ public class AnswerDetailActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "点赞成功", Toast.LENGTH_LONG).show();
             }
         });
+//        评论按钮的监听事件
         layout_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +145,7 @@ public class AnswerDetailActivity extends Activity {
             }
         });
 
+//        收藏按钮的监听事件
         iv_articalFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,6 +205,15 @@ public class AnswerDetailActivity extends Activity {
             }
         });
 
+        lv_concerned.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("--------"+listconcerned.get(position).getCommunityID());
+                Intent intent = new Intent(getApplicationContext(), AnswerDetailActivity.class);
+                intent.putExtra("CommunityID",listconcerned.get(position).getCommunityID());
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -229,6 +248,7 @@ public class AnswerDetailActivity extends Activity {
      */
     public void getAnswerDetail(final Context context, String url) {
         HttpUtils utils = new HttpUtils();
+        Log.d(TAG,"getAnswerDetail");
         utils.send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -255,7 +275,7 @@ public class AnswerDetailActivity extends Activity {
         AnswerDeatilValueBean answerDetailBeanValue;
         List<AnswerDetailConcerned> answerDetailConcerneds;
         List<AnswerDetailBean.AnswerDetailComment> answerDetailComments;
-        System.out.println("AnswerDeatile==========================" + result);
+//        System.out.println("AnswerDeatile==========================" + result);
         Gson gson = new Gson();
         answerDetailBean = gson.fromJson(result, AnswerDetailBean.class);
         answerDetailBeanValue = answerDetailBean.value;
@@ -294,13 +314,15 @@ public class AnswerDetailActivity extends Activity {
         String[] commentTime = new String[30];
         String[] commentImge = new String[30];
         String[] commentContent = new String[30];
+        listcomment.clear();
+        listDoctorComment.clear();
         for (int i = 0; i < answerDetailComments.size(); i++) {
             commentContent[i] = answerDetailComments.get(i).Content;
             commentImge[i] = answerDetailComments.get(i).User.UserIcon;
             commentNickName[i] = answerDetailComments.get(i).User.UserName;
             commentTime[i] = dateUtils.getDateToString(Long.parseLong(answerDetailComments.get(i).CreateTime));
             AnswerDetailModel answerDetailModel = new AnswerDetailModel(commentImge[i], commentNickName[i], commentTime[i], commentContent[i]);
-//            Log.i(TAG,commentImge[i]+" "+commentNickName[i]+" "+commentTime[i]+" "+commentContent[i]);
+            Log.d(TAG,commentContent[i]);
             if (answerDetailComments.get(i).User.UserTypeID.equals("2")) {
                 Log.i(TAG, "here!!!!!!!!!!");
                 listDoctorComment.add(answerDetailModel);
@@ -324,6 +346,7 @@ public class AnswerDetailActivity extends Activity {
         String[] AnswerContent = new String[30];
         String[] CommunityID = new String[30];
         String[] Picture = new String[30];
+        listconcerned.clear();
         for (int i = 0; i < answerDetailConcerneds.size(); i++) {
             Picture[i] = GlobalAddress.SERVER + answerDetailConcerneds.get(i).getCommunityPic();
             Iv_headImage[i] = answerDetailConcerneds.get(i).User.getUserIcon();
@@ -345,6 +368,9 @@ public class AnswerDetailActivity extends Activity {
     protected void onResume() {
         super.onResume();
 //        onCreate(null);
+//        initData();
+        Log.d(TAG,"onResume");
+        reqGlobalAddress();
     }
 
     class MyrequestCallBack extends RequestCallBack {
