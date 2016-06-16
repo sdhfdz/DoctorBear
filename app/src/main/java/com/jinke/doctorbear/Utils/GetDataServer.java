@@ -246,13 +246,8 @@ public class GetDataServer {
 
             }
         });
-
     }
 
-    /**
-     * 解析科普数据
-     * @param result
-     */
 
     private String[] ArticleTitile= new String[30];
     private String[] CreateTime = new String[30];
@@ -295,12 +290,8 @@ public class GetDataServer {
 
 
 
-    /**
-     * 综合搜索
-     *
-     */
-    public void getGeneralSearch(final Context context,String url,final ListView deseaseListView,final ListView medicineListView,
-                                 final ListView scienceListView,final ListView questionListView){
+    public void getGeneralSearch(final Context context, String url, final ListView deseaseListView, final ListView medicineListView,
+                                 final ListView scienceListView, final ListView questionListView){
 
         HttpUtils utils = new HttpUtils();
         utils.send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
@@ -445,5 +436,91 @@ public class GetDataServer {
                 new String[] { "info","tag"},
                 new int[] { R.id.search_result_q_item_tv,R.id.search_result_q_item_tag_tv}));
 
+    }
+    private List<Map<String, Object>> getDeseaseData() {
+        List<Map<String, Object>> deseaseList = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("info", "过敏");
+        deseaseList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "感冒");
+        deseaseList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "发烧");
+        deseaseList.add(map);
+
+        return deseaseList;
+    }
+    private List<Map<String, Object>> getMedicineData() {
+        List<Map<String, Object>> medicineList = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("info", "999牌感冒药");
+        medicineList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "感康");
+        medicineList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "胃泰");
+        medicineList.add(map);
+
+        return medicineList;
+    }
+    private List<Map<String, Object>> getScienceData() {
+        List<Map<String, Object>> scienceList = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("info", "感冒药能预防感冒吗？");
+        map.put("tag","呼吸科");
+        scienceList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "一篇文章教你整个孕期都睡上安稳觉");
+        map.put("tag","妇产科");
+        scienceList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "飞机升降时保护耳朵的简单方法");
+        map.put("tag","耳鼻咽喉科");
+        scienceList.add(map);
+
+        return scienceList;
+    }
+    private List<Map<String, Object>> getQuestionData() {
+        List<Map<String, Object>> questionList = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("info", "请问脸上花粉过敏该怎么办？");
+        map.put("tag","皮肤科");
+        questionList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "挂吊瓶对感冒来说有必要吗？");
+        map.put("tag","呼吸科");
+        questionList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("info", "请问，体检需要多久一次？");
+        map.put("tag","综合");
+        questionList.add(map);
+
+        return questionList;
+    }
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 }
