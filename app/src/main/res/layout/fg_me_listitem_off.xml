@@ -24,15 +24,15 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="高血压"/>
-            <Button
+            <TextView
                 android:layout_toRightOf="@id/fg_me_illness_name"
                 android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="呼吸内科"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/fg_me_type"
-                android:layout_width="70dp"
-                android:layout_height="24dp"/>
+                android:background="@drawable/textview_border" />
 
 
 
