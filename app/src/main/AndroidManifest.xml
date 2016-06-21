@@ -60,6 +60,7 @@
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.SearchAllActivity" />
         <activity android:name=".Activity.DiseaseDetail"></activity>
+        <activity android:name=".Activity.MedicineDetail"></activity>
         <activity
             android:name=".Activity.BearSmartActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />

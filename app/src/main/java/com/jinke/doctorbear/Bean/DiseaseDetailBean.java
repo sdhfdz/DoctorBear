@@ -1,8 +1,6 @@
 package com.jinke.doctorbear.Bean;
-
-import java.util.List;
-
 /**
+ * 获取疾病详情类
  * Created by wyf on 2016/6/16.
  */
 public class DiseaseDetailBean {

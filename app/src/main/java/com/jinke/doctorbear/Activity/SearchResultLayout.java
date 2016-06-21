@@ -58,8 +58,25 @@ public class SearchResultLayout  extends Activity{
     private TextView  graybackgroud_tv1;
     private TextView  graybackgroud_tv2;
 
+    private String[] GeneralPathemaID = new String[20];
+    private String[] GeneralPathemaName = new String[20];
+    private String[] GeneralPathemaTypeName = new String[20];
 
-//从函数中提取数据定义
+    private String[] GeneralMedicineID = new String[20];
+    private String[] GeneralMedicineName = new String[20];
+
+    private String[] GeneralHospitalID = new String[20];
+    private String[] GeneralHospitalName = new String[20];
+
+    private String[] GeneralCommunityID = new String[20];
+    private String[] GeneralCommunityTitle = new String[20];
+    private String[] GeneralCommunityPathemaTypeName = new String[20];
+
+    private String[] GeneralArticleID = new String[20];
+    private String[] GeneralArticleTitle = new String[20];
+    private String[] GeneralArticlePathemaTypeName = new String[20];
+
+
     private GeneralSearchBean generalSearchBean;
     private List<GeneralSearchBean.GeneralSearchPathema> generalSearchPathemas;
     private List<GeneralSearchBean.GeneralSearchMedicine> generalSearchMedicines;
@@ -68,10 +85,6 @@ public class SearchResultLayout  extends Activity{
     private List<GeneralSearchBean.GeneralSearchArticle> generalSearchArticles;
 
     private List<Map<String, Object>> pathemaList = new ArrayList<Map<String, Object>>();
-    //private List<Map<String, Object>> ArticleList = new ArrayList<Map<String, Object>>();
-    //private List<Map<String, Object>> medicineList = new ArrayList<Map<String, Object>>();
-    //private List<Map<String, Object>> communityList = new ArrayList<Map<String, Object>>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,13 +168,9 @@ public class SearchResultLayout  extends Activity{
         medicineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //System.out.println("--------"+deseaseListView.get(position).getCommunityID());
-                //Intent intent = new Intent(SearchResultLayout.this, DiseaseDetail.class);
-                //传递名称 以进入数据库
-                //intent.putExtra("CommunityID", );
-                //   intent.putExtra("PathemaID",generalSearchPathemas.get(position).PathemaID);
-
-              //  startActivity(intent);
+                Intent intent = new Intent(SearchResultLayout.this, MedicineDetail.class);
+                intent.putExtra("MedicineID",generalSearchMedicines.get(position).MedicineID);
+                startActivity(intent);
             }
         });
     }
@@ -265,23 +274,6 @@ public class SearchResultLayout  extends Activity{
     }
 
 
-    private String[] GeneralPathemaID = new String[20];
-    private String[] GeneralPathemaName = new String[20];
-    private String[] GeneralPathemaTypeName = new String[20];
-
-    private String[] GeneralMedicineID = new String[20];
-    private String[] GeneralMedicineName = new String[20];
-
-    private String[] GeneralHospitalID = new String[20];
-    private String[] GeneralHospitalName = new String[20];
-
-    private String[] GeneralCommunityID = new String[20];
-    private String[] GeneralCommunityTitle = new String[20];
-    private String[] GeneralCommunityPathemaTypeName = new String[20];
-
-    private String[] GeneralArticleID = new String[20];
-    private String[] GeneralArticleTitle = new String[20];
-    private String[] GeneralArticlePathemaTypeName = new String[20];
 
     private void   parseGeneralData(String result,Context context,ListView deseaseListView,ListView medicineListView,ListView scienceListView,ListView questionListView) {
       //  List<Map<String, Object>> pathemaList = new ArrayList<Map<String, Object>>();
@@ -303,7 +295,7 @@ public class SearchResultLayout  extends Activity{
                 GeneralPathemaID[i] = generalSearchPathemas.get(i).PathemaID;
                 GeneralPathemaName[i] = generalSearchPathemas.get(i).PathemaName;
                 GeneralPathemaTypeName[i] = generalSearchPathemas.get(i).PathemaTypeName;
-                System.out.println("GeneralPathema：" + GeneralPathemaID[i] + GeneralPathemaName[i] + GeneralPathemaTypeName[i]);
+
             //}
 
             //for (int i = 0; i <generalSearchPathemas.size(); i++) {
@@ -319,7 +311,6 @@ public class SearchResultLayout  extends Activity{
             for (int i = 0; i < generalSearchMedicines.size(); i++) {
                 GeneralMedicineID[i] = generalSearchMedicines.get(i).MedicineID;
                 GeneralMedicineName[i] = generalSearchMedicines.get(i).MedicineName;
-                System.out.println("GeneralMedicine" + GeneralMedicineID[i] + GeneralMedicineName[i]);
             }
             Map<String, Object> medicineListmap;
             for (int i = 0; i <generalSearchMedicines.size(); i++) {
@@ -333,7 +324,7 @@ public class SearchResultLayout  extends Activity{
             for (int i = 0; i <generalSearchHospitals.size() ; i++) {
                 GeneralHospitalID[i] = generalSearchHospitals.get(i).HospitalID;
                 GeneralHospitalName[i] = generalSearchHospitals.get(i).HospitalName;
-                System.out.println("GeneralHospital" + GeneralHospitalID[i] + GeneralHospitalName[i]);
+           //     System.out.println("GeneralHospital" + GeneralHospitalID[i] + GeneralHospitalName[i]);
 
 
             }
@@ -344,7 +335,7 @@ public class SearchResultLayout  extends Activity{
                 GeneralCommunityID[i] = generalSearchCommunities.get(i).CommunityID;
                 GeneralCommunityTitle[i] = generalSearchCommunities.get(i).CommunityTitle;
                 GeneralCommunityPathemaTypeName[i] = generalSearchCommunities.get(i).PathemaTypeName;
-                System.out.println("GeneralCommunity" + GeneralCommunityID[i] + GeneralCommunityTitle[i] + GeneralCommunityPathemaTypeName[i]);
+           //     System.out.println("GeneralCommunity" + GeneralCommunityID[i] + GeneralCommunityTitle[i] + GeneralCommunityPathemaTypeName[i]);
 
             }
             Map<String, Object> communityListmap;
@@ -361,7 +352,7 @@ public class SearchResultLayout  extends Activity{
                 GeneralArticleID[i] = generalSearchArticles.get(i).ArticleID;
                 GeneralArticleTitle[i] = generalSearchArticles.get(i).ArticleTitle;
                 GeneralArticlePathemaTypeName[i] = generalSearchArticles.get(i).PathemaTypeName;
-                System.out.println("GeneralArticle" + GeneralArticleID[i] + GeneralArticleTitle[i] + GeneralArticlePathemaTypeName[i]);
+            //    System.out.println("GeneralArticle" + GeneralArticleID[i] + GeneralArticleTitle[i] + GeneralArticlePathemaTypeName[i]);
 
             }
             Map<String, Object> ArticleListmap;
