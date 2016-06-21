@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@color/colorGrayTitleBG">
         <ImageView
@@ -21,10 +20,9 @@
         <TextView android:id="@+id/search_medicine_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:text="盐酸二甲双胍片"/>
-    </LinearLayout>
+            android:textSize="18sp"
+            android:gravity="center" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,8 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textColor="@color/colorGrayFont"
-        android:textSize="15sp"
-        android:text="盐酸二甲双胍片"/>
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -63,8 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textColor="@color/colorGrayFont"
-        android:textSize="15sp"
-        android:text="用于单纯饮食控制不满意的II型糖尿病病人，尤其是肥胖和伴高胰岛素血症者，用本药不但有降 血糖作用，还可能有減轻体重和高胰岛素血症的效果。对某些磺酰脲类疗效差的患者可奏效，如与磺酰脲类、小肠糖苷酶抑制剂或噻唑烷二酮类降糖药合用，较分别单用的效果更好。亦可用于胰岛素治 疗的患者，以减少胰岛素用量."/>
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -79,8 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textColor="@color/colorGrayFont"
-        android:textSize="15sp"
-        android:text="0.5g"/>
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -94,8 +89,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textColor="@color/colorGrayFont"
-        android:textSize="15sp"
-        android:text="口服成人开始一次0.25g，一日2〜3次，以后根据疗效逐渐加量，一般每日量1〜1.5g最多每日 不超过2g.餐中或餐后即刻服用，可减轻胃肠道反应.
-"/>
+        android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>
