@@ -836,12 +836,12 @@
         "source": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\rc_ic_voice_receive_play1.png"
     },
     {
-        "merged": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f60f.png",
-        "source": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f60f.png"
-    },
-    {
         "merged": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f60b.png",
         "source": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f60b.png"
+    },
+    {
+        "merged": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\u1f60f.png",
+        "source": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\u1f60f.png"
     },
     {
         "merged": "D:\\MyAndroid\\DoctorBear\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\rc_indicator_hover.png",

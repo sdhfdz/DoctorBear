@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -290,6 +291,7 @@ public class SearchLocationActivity extends Activity {
                 mLatLng = new LatLng(location.getLatitude(),
                         location.getLongitude());
                 mHandler.sendEmptyMessage(2);
+
 
                 MapStatus mMapStatus = new MapStatus.Builder()
                         .target(mLatLng)

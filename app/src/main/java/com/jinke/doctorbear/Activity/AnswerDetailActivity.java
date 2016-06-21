@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import com.jinke.doctorbear.Model.FgHomeAnswerModel;
 import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.DateUtils;
 import com.jinke.doctorbear.Utils.GlobalAddress;
+import com.jinke.doctorbear.Utils.ParseText;
 import com.jinke.doctorbear.Utils.ScrollListView;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -77,6 +79,7 @@ public class AnswerDetailActivity extends Activity {
     private TextView tv_report;
 
     DateUtils dateUtils = new DateUtils();
+    ParseText parseText = new ParseText();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -271,11 +274,12 @@ public class AnswerDetailActivity extends Activity {
      * @param result
      */
     private void parseAnswerDetailData(String result) {
+        System.out.println("AnswerDeatile==========================" + result);
+
         AnswerDetailBean answerDetailBean;
         AnswerDeatilValueBean answerDetailBeanValue;
         List<AnswerDetailConcerned> answerDetailConcerneds;
         List<AnswerDetailBean.AnswerDetailComment> answerDetailComments;
-//        System.out.println("AnswerDeatile==========================" + result);
         Gson gson = new Gson();
         answerDetailBean = gson.fromJson(result, AnswerDetailBean.class);
         answerDetailBeanValue = answerDetailBean.value;
@@ -302,7 +306,7 @@ public class AnswerDetailActivity extends Activity {
         } else {
             Picasso.with(this).load(GlobalAddress.SERVER + answerDetailBeanValue.CommunityPic).into(iv_urlContent);
         }
-        tv_content.setText(answerDetailBeanValue.CommunityDesc);
+        tv_content.setText(Html.fromHtml(parseText.tranHtml(answerDetailBeanValue.CommunityDesc)));
         tv_articalTime.setText(dateUtils.getDateToString(Long.parseLong(answerDetailBeanValue.CreateTime)));
         tv_like.setText(answerDetailBeanValue.Likenum);
         tv_comment.setText(answerDetailBeanValue.Comm);

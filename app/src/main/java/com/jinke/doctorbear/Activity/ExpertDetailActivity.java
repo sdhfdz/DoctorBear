@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -78,6 +79,7 @@ public class ExpertDetailActivity extends Activity {
 
     GlobalAddress globalAddress = new GlobalAddress();
     DateUtils dateUtils = new DateUtils();
+    ParseText parseText = new ParseText();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,7 +293,7 @@ public class ExpertDetailActivity extends Activity {
         } else {
             Picasso.with(this).load(globalAddress.SERVER + expertDetailValueBean.ArticlePic).into(iv_urlContent);
         }
-        tv_content.setText(expertDetailValueBean.ArticleDesc);
+        tv_content.setText(Html.fromHtml(parseText.tranHtml(expertDetailValueBean.ArticleDesc)));
         tv_articalTime.setText(dateUtils.getDateToString(Long.parseLong(expertDetailValueBean.CreateTime)));
         tv_like.setText(expertDetailValueBean.Likenum);
         tv_comment.setText(expertDetailValueBean.Comm);

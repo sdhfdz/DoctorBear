@@ -17,7 +17,7 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 public class GlobalAddress {
     private Context ctx;
     private static Platform weibo=  ShareSDK.getPlatform(SinaWeibo.NAME);
-    public static final String SERVER="http://192.168.1.101";
+    public static final String SERVER="http://172.27.35.5";
     public static final  String App_key="vnroth0krx3io";
     public static String sha1(String data)  {
         MessageDigest md = null;
