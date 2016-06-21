@@ -30,7 +30,7 @@ public class DiseaseDetail extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_disease_detail);
+        setContentView(R.layout.search_disease_result);
         //初始化控件
         initView();
         //初始化链接数据

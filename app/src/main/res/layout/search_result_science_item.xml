@@ -31,6 +31,7 @@
                 android:layout_marginTop="4dp"
                 android:textColor="@color/colorMain"
                 android:textSize="10dp"
+                android:text="sshjkhggfff"
                 android:background="@drawable/textview_border" />
         </LinearLayout>
 
