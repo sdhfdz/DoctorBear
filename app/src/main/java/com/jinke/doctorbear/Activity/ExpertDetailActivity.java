@@ -25,6 +25,7 @@ import com.jinke.doctorbear.R;
 import com.jinke.doctorbear.Utils.CircleImageView;
 import com.jinke.doctorbear.Utils.DateUtils;
 import com.jinke.doctorbear.Utils.GlobalAddress;
+import com.jinke.doctorbear.Utils.ParseText;
 import com.jinke.doctorbear.Utils.ScrollListView;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -302,8 +303,6 @@ public class ExpertDetailActivity extends Activity {
         authorDetail.setText(user.UserDetail);
         Picasso.with(this).load(user.UserIcon).into(authorIcon);
         UserID = expertDetailValueBean.UserID;
-
-//        作者信息
 
 
 //        评论数据

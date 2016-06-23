@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,15 +18,22 @@ import android.text.TextWatcher;
 import android.text.style.ImageSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.jinke.doctorbear.Utils.NiceSpinner;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -35,7 +44,7 @@ import java.util.List;
  * 连接home_textedit.xml即主页跳转提问页面
  */
 public class HomeTextEditActivity extends Activity implements View.OnClickListener {
-    private static final String[] diseasesType={"精神","普外科","骨科","眼科","耳鼻喉科"};
+
     private TextView cancel_textV ;
     private TextView  submit_textV;
     private TextView  count_textV;
@@ -48,9 +57,14 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
     private Bitmap bitmap;
 
     private boolean if_focusTitleEdit;
-    private ArrayAdapter<String> arrayAdapter;
     private  InputMethodManager imm;
 
+    private HttpUtils http;
+
+    private Uri originalUri;
+    private String UserID;
+    private int kind;
+    private String picPath = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +74,8 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
         initView();
         //初始化监听
         initListener();
+        //数据提交
+        initData();
 
     }
 
@@ -67,8 +83,7 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
      * 初始化控件
      * 获取控件id并初始化spinner
      */
-    private void initView()
-    {
+    private void initView() {
         cancel_textV = (TextView)findViewById(R.id.home_edit_cancel_tv) ;
         submit_textV = (TextView)findViewById(R.id.home_edit_submit_tv);
         count_textV = (TextView)findViewById(R.id.home_edit_titleBar_count_tv);
@@ -82,9 +97,9 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
 
         niceSpinner = (NiceSpinner) findViewById(R.id.home_edit_spinner);
         //将可选内容与ArrayAdapter连接起来
-        List<String> dataset = new LinkedList<>(Arrays.asList("疾病分类", "普外科", "骨科",
+        List<String> dataSet = new LinkedList<>(Arrays.asList("疾病分类", "普外科", "骨科",
                 "眼科", "消化科","心脏内科", "神经内科","儿科","皮肤科"," 肿瘤科"));
-        niceSpinner.attachDataSource(dataset);
+        niceSpinner.attachDataSource(dataSet);
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         //获取焦点
@@ -96,6 +111,7 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
      * 初始化监听
      */
     private void initListener() {
+
         cancel_textV.setOnClickListener(this);
         submit_textV.setOnClickListener(this);
         add_imageV.setOnClickListener(this);
@@ -115,6 +131,13 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
         });
     }
 
+    private void initData() {
+
+        Intent intent = getIntent();
+        UserID = intent.getStringExtra("UserID");
+        kind = intent.getIntExtra("kind", 0);
+    }
+
     /**
      * 监听事件的实现
      * 取消的监听事件,搜索框的监听事件
@@ -128,6 +151,7 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
 //                overridePendingTransition(R.anim.alphaout,R.anim.alphain);
                 break;
             case R.id.home_edit_submit_tv:
+                postCommentToServer();
                 Toast.makeText(v.getContext(), "提交到数据库", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
@@ -150,9 +174,38 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
 
     }
 
+
+    public void postCommentToServer(){
+        http = new HttpUtils();
+        http.configCurrentHttpCacheExpiry(1);
+        RequestParams params = new RequestParams();
+
+        params.addBodyParameter("Title",title_editT.getText().toString());
+        params.addBodyParameter("Desc",main_editT.getText().toString());
+        params.addBodyParameter("Pic", new File(originalUri.getPath()));
+        params.addBodyParameter("PathemaTypeID",""+2);
+        params.addBodyParameter("UserID",UserID);
+        params.addBodyParameter("tag",""+kind);
+        http.send(HttpRequest.HttpMethod.POST, GlobalAddress.SERVER+"/doctuser/edit.php",params,new MyrequestCallBack());
+    }
+    class MyrequestCallBack extends RequestCallBack {
+        @Override
+        public void onSuccess(ResponseInfo responseInfo) {
+            JSONObject jsonObject=null;
+            finish();
+        }
+        @Override
+        public void onFailure(HttpException e, String s) {
+        }
+    }
     private void setBlod() {
 
     }
+
+    /**
+     * 监听编辑框文本改变
+     * 包含监听当前字数，以及监听不许超过一定字数
+     */
     class EditChangedListener implements TextWatcher {
         private CharSequence temp;//监听前的文本
         private int editStart;//光标开始位置
@@ -166,15 +219,6 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             count_textV.setText(s.length() + "字");
-            SpannableString ss_blod = new SpannableString(s);
-           // insertIntoEditText(ss_blod);
-//            if(true){
-//                //文本内容
-//                SpannableString ss_blod = new SpannableString(s);
-//                //粗体
-//                ss_blod.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 5, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                main_editT.setText(ss_blod);
-//            }
 
         }
         @Override
@@ -201,7 +245,6 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
         getImage.addCategory(Intent.CATEGORY_OPENABLE);
         getImage.setType("image/*");
         //startActivityForResult(Intent.createChooser(getImage,"选择图片"), 2);
-        //onActivityResult(1,1,getImage);
         startActivityForResult(getImage, 1);
     }
 
@@ -218,15 +261,24 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
             super.onActivityResult(requestCode, resultCode, intent);
 
             ContentResolver resolver = getContentResolver();
+
             if (resultCode == RESULT_OK) {
                 if (requestCode == 1) {
-                    Uri originalUri = intent.getData();
-                    Toast.makeText(HomeTextEditActivity.this, originalUri.toString(), Toast.LENGTH_SHORT).show();
+                    originalUri = intent.getData();
                     try {
+                        String[] pojo = { MediaStore.Images.Media.DATA };
+                        Cursor cursor = managedQuery(originalUri, pojo, null, null, null);
+                       // if (cursor != null) {
+                            int colunm_index = cursor
+                                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                            cursor.moveToFirst();
+                            picPath = cursor.getString(colunm_index);
+
+                        //}
                         Bitmap originalBitmap = BitmapFactory.decodeStream(resolver.openInputStream(originalUri));
                         bitmap = originalBitmap;
                      //   bitmap = resizeImage(originalBitmap, 100, 100);
-                    } catch (FileNotFoundException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     if (bitmap != null) {
@@ -236,9 +288,6 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
                     }
                 }
             }
-            if (bitmap != null) {
-            }
-
         }
 
 
@@ -274,8 +323,7 @@ public class HomeTextEditActivity extends Activity implements View.OnClickListen
      * 等比例缩放bitmap图像
      * @return Bitmap
      */
-    public Bitmap resizeImage(Bitmap bitmap, int w, int h)
-    {
+    public Bitmap resizeImage(Bitmap bitmap, int w, int h) {
         Bitmap BitmapOrg = bitmap;
         int width = BitmapOrg.getWidth();
         int height = BitmapOrg.getHeight();

@@ -93,6 +93,7 @@ public class AdpHomeFgAnswer extends AdpBase<FgHomeAnswerModel> {
         Picasso.with(context).load(fgHomeAnswerModel.getIv_headImage()).error(R.mipmap.logo).into(holder.iv_headImage);
         if (fgHomeAnswerModel.getPicture().equals(GlobalAddress.SERVER)) {
             holder.picture.setVisibility(View.GONE);
+
         } else {
             holder.picture.setVisibility(View.VISIBLE);
             WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

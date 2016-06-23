@@ -29,7 +29,6 @@ public class ConversationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
 //       String title= getIntent().getData().getQueryParameter("title");
-//        System.out.println("titile"+title+"???");
         BarTitle = (TextView) findViewById(R.id.title_bar_content);
         BarTitle.setText("");
 
@@ -48,7 +47,6 @@ public class ConversationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        System.out.println("lalllallal");
         finish();
     }
     class MyrequestCallBack extends RequestCallBack{
@@ -70,9 +68,6 @@ public class ConversationActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            System.out.println(responseInfo.result+"hahhahhhhh");
-
-
         }
 
         @Override

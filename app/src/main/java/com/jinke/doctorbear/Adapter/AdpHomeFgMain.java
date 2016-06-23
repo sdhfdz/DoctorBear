@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.jinke.doctorbear.Activity.AnswerDetailActivity;
 import com.jinke.doctorbear.Activity.ExpertDetailActivity;
+import com.jinke.doctorbear.Activity.HomeTextEditActivity;
 import com.jinke.doctorbear.Bean.HomeAnswerBean;
 import com.jinke.doctorbear.Bean.HomeAnswerValueBean;
 import com.jinke.doctorbear.Bean.HomeExpertBean;
@@ -65,7 +66,6 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
 
     private String[] img_id = new String[10];      //科普轮播图片id
     private ArrayList<String> img_url = new ArrayList<String>();      //科普轮播图片
-
     private GetDataServer getDataServer = new GetDataServer();
 
     public AdpHomeFgMain(Context context) {
@@ -86,10 +86,8 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         view = null;
         //问答界面
         if (position==0){
-
             view = LayoutInflater.from(context).inflate(R.layout.fg_home_answer, null);
             listView_answer = (ListView) view.findViewById(R.id.fg_home_answer_lv);
-
 
             //从服务器给listview添加数据
             listAnswer = new ArrayList<FgHomeAnswerModel>();
@@ -130,17 +128,6 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         return view;
     }
 
-    private void initExpertListener() {
-        listView_expert.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("--------"+listExpert.get(position).getArticleID());
-                Intent intent = new Intent(context, ExpertDetailActivity.class);
-                intent.putExtra("ArticleID",listExpert.get(position).getArticleID());
-                context.startActivity(intent);
-            }
-        });
-    }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
@@ -166,32 +153,20 @@ public class AdpHomeFgMain  extends PagerAdapter implements SwipeRefreshLayout.O
         }, 2000);
     }
 
-
-
-//    @Override
-//    public void onLoad() {
-//        //values.add("Add " + values.size());
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                mSwipeLayout.setLoading(false);
-//                String url = GlobalAddress.SERVER +"/doctuser/community_list.php?" + "lastID="+ adpHomeFgAnswer.communityID;
-//                listAnswer.clear();
-////                listView_answer.removeAllViews();
-//                getDataServer.getAnswerFromServer(context,url,listAnswer,listView_answer,adpHomeFgAnswer);
-//                adpHomeFgAnswer.notifyDataSetChanged();
-//            }
-//        }, 1000);
-//    }
-
-
-
+    private void initExpertListener() {
+        listView_expert.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(context, ExpertDetailActivity.class);
+                intent.putExtra("ArticleID",listExpert.get(position).getArticleID());
+                context.startActivity(intent);
+            }
+        });
+    }
     public void initAnswerListener(){
         listView_answer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("--------"+listAnswer.get(position).getCommunityID());
                 Intent intent = new Intent(context, AnswerDetailActivity.class);
                 intent.putExtra("CommunityID",listAnswer.get(position).getCommunityID());
                 context.startActivity(intent);

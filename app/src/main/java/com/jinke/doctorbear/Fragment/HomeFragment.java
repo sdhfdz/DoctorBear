@@ -12,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jinke.doctorbear.Activity.HomeSearchActivity;
-import com.jinke.doctorbear.Activity.HomeTextEdit;
+import com.jinke.doctorbear.Activity.HomeTextEditActivity;
 import com.jinke.doctorbear.Adapter.AdpHomeFgMain;
 import com.jinke.doctorbear.R;
+import com.jinke.doctorbear.Utils.GlobalAddress;
 import com.jinke.doctorbear.Utils.NoScrollViewPager;
 
 /**
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 	private TextView tv_expert_line;
 	private ImageView iv_search;
 	private ImageView iv_edit;
+	private int kind = 0 ;
 	SharedPreferences sp;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,14 +73,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 		switch (v.getId()){
 			case R.id.fg_home_tv_answer:
 				changeColorAndPage(0);
+				kind = 0;
 				sp.edit().putBoolean("page",true).commit();
 				break;
 			case R.id.fg_home_tv_expert:
 				changeColorAndPage(1);
+				kind = 1;
 				sp.edit().putBoolean("page",false).commit();
 				break;
 			case R.id.fg_home_iv_edit:
-				Intent intent_edit = new Intent(v.getContext(), HomeTextEdit.class);
+				Intent intent_edit = new Intent(v.getContext(), HomeTextEditActivity.class);
+				intent_edit.putExtra("kind", kind);
+				intent_edit.putExtra("UserID", GlobalAddress.getUserId(this.getActivity()));
 				startActivity(intent_edit);
 				break;
 			case R.id.fg_home_iv_search:

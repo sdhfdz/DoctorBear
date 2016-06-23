@@ -43,7 +43,6 @@ public class PushCommentActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_push_comment);
-
         init();
     }
 
@@ -109,7 +108,6 @@ public class PushCommentActivity extends Activity{
         @Override
         public void onSuccess(ResponseInfo responseInfo) {
             JSONObject jsonObject=null;
-            System.out.println(responseInfo.result.toString()+"PushCommentActivity");
             finish();
         }
 

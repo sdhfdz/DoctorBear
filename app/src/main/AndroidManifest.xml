@@ -53,7 +53,7 @@
         </activity>
         <activity android:name=".Activity.HomeSearchActivity" />
         <activity
-            android:name=".Activity.HomeTextEdit"
+            android:name=".Activity.HomeTextEditActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".Activity.SearchResultLayout" />
         <activity android:name=".Activity.MyCollectionActivity" />

@@ -274,7 +274,6 @@ public class AnswerDetailActivity extends Activity {
      * @param result
      */
     private void parseAnswerDetailData(String result) {
-        System.out.println("AnswerDeatile==========================" + result);
 
         AnswerDetailBean answerDetailBean;
         AnswerDeatilValueBean answerDetailBeanValue;
